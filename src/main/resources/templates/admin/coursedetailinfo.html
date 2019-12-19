@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程详情</title>
+
+<!--    <link rel="stylesheet" href="../../static/css/layui.css" media="all">-->
+    <link rel="stylesheet" type="text/css" href="/css/layui.css">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">研究生论文选读系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+
+    </div>
+
+    <div class="layui-side layui-bg-black">
+
+        <div class="layui-row"  >
+            <i class="layui-icon layui-icon-username layui-col-md-offset3" style="font-size: 100px; color: #F0F0F0;"></i>
+        </div>
+
+
+        <h4 style="text-align: center"> 你好 你是系统管理员</h4>
+        <h4 style="text-align: center">欢迎登录</h4>
+        <hr class="layui-bg-green">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">基础管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="coursepage.html">课程管理</a></dd>
+                    <dd><a href="../teacher/teacherpage.html">教师管理</a></dd>
+
+
+                </dl>
+            </li>
+
+
+        </ul>
+
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-bg-green" style=" font-size: 20px; padding: 15px;">课程详情</div>
+        <br><br>
+        <div class="layui-row">
+
+            <div class="layui-col-md-offset2 layui-col-md8">
+
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <br>
+<!--                        <label class="layui-form-label">课程ID</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input readonly type="text" name="couse_id" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+                        <br>
+                        <label class="layui-form-label">课程名</label>
+                        <!--/*@thymesVar id="onecourses" type=""*/-->
+                        <div class="layui-input-block" >
+                            <input type="text" name="course_name" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseName()}">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">开设学期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="term"  autocomplete="off" class="layui-input" th:value="${onecourses.getTerm()}">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">总课时数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="couse_hour" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseHour()}">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">主讲教师</label>
+                        <div class="layui-input-block">
+                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">教师ID</label>
+                        <div class="layui-input-block">
+                            <input readonly type="text" name="teacher_id" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">身份</label>
+                        <div class="layui-input-block">
+                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">授课学时</label>
+                        <div class="layui-input-block">
+                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+                    <div class="layui-row layui-icon-align-center" >
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*"  >立即提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        <div class="layui-footer" style="text-align: end">
+            <!-- 底部固定区域 -->
+            170603124 苏轶
+        </div>
+    </div>
+</div>
+</div>
+
+
+</div>
+
+
+<!--<script src="../../static/layui.js" charset="utf-8"></script>-->
+<!--<script src="../../static/layui.all.js" charset="utf-8"></script>-->
+<script src="/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/layui.all.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['element'], function () {
+        var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+
+    });
+</script>
+</body>
+</html>
