@@ -10,10 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -24,32 +25,36 @@ public class CourseController {
 
     /**
      * 显示课程详细信息
+     *
      * @param model
      * @return
      */
 
-    @RequestMapping(value = "/showcourseinfo")
-    public String showcourseinfo(Model model) {
-        Course course = courseService.coursedetailinfo();
+    @RequestMapping(value = "/showcourseinfo",method= RequestMethod.GET)
+    public String showcourseinfo(Model model, HttpServletRequest request) {
+        String courseName = request.getParameter("courseName");
+        Course course = courseService.coursedetailinfo(courseName);
         model.addAttribute("onecourses", course);
         return "admin/coursedetailinfo.html";
     }
 
     /**
      * 显示全部课程信息
+     *
      * @param m
      * @param start
      * @param size
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/coursepage")
+    @RequestMapping(value = "/coursepage")
     public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
-        PageHelper.startPage(start,size,"course_id desc");
-        List<Course>courses = courseService.selectAll();
+        PageHelper.startPage(start, size, "course_id desc");
+        List<Course> courses = courseService.selectAll();
         PageInfo<Course> page = new PageInfo<>(courses);
         m.addAttribute("page", page);
         return "/admin/coursepage.html";
     }
+
 
 }

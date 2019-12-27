@@ -3,6 +3,7 @@ package com.suyi.demo.mapper;
 import com.suyi.demo.model.Course;
 import com.suyi.demo.model.CourseExample;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -44,7 +45,10 @@ public interface CourseMapper {
     @Select("select * from sy.course")
     List<Course> selectAll();
 
+
     @ResultMap("BaseResultMap")
-    @Select("select * from sy.course where course_name='java'")
-    Course coursedetailinfo();
+    @Select("select * from sy.course where course_name=#{courseName}")
+    Course coursedetailinfo(String courseName);
+
+
 }

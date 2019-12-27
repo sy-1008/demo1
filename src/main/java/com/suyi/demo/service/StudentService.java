@@ -3,6 +3,8 @@ package com.suyi.demo.service;
 import java.util.List;
 import com.suyi.demo.model.StudentExample;
 import com.suyi.demo.model.Student;
+
+
 public interface StudentService{
 
 
@@ -32,4 +34,6 @@ public interface StudentService{
 
     int batchInsert(List<Student> list);
 
+  Student studentregisterByStudentid(String studentId, String name, String password,
+                                     String sex, String major, String className);
 }

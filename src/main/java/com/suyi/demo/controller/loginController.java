@@ -36,11 +36,12 @@ public class loginController<LoginRequest, StatusResponse> {
         // 验证用户身份是否正确
         User loginUser = userService.loginUserByUserid(u.getUserId(), u.getPassword());
         if (loginUser == null) {
-             request.setAttribute("msg", "用户名或密码错误");
+            request.setAttribute("msg", "用户名或密码错误");
             model.addAttribute("errorUser", u);
             return "common/login.html";
         }
         // 设置 Session
+
         HttpSession session = request.getSession();
 
         session.setAttribute("user", loginUser);
@@ -49,6 +50,7 @@ public class loginController<LoginRequest, StatusResponse> {
             return "redirect:/studentpage";
         }
         if (loginUser.getRole() == 2) {//教师
+
             return "redirect:/teacherpage";
         }
         if (loginUser.getRole() == 1) {//管理员
@@ -57,6 +59,7 @@ public class loginController<LoginRequest, StatusResponse> {
         }
         return "common/login.html";
     }
+    
 }
 
 

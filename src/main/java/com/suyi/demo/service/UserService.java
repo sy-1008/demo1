@@ -33,4 +33,6 @@ public interface UserService{
     int batchInsert(List<User> list);
 
     User loginUserByUserid(String userid, String password);
+
+
 }

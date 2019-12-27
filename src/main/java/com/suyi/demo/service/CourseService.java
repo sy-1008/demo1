@@ -36,5 +36,5 @@ public interface CourseService{
 
     List<Course> selectAll();
 
-    Course coursedetailinfo();
+    Course coursedetailinfo(String courseName);
 }

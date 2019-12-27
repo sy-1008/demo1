@@ -32,4 +32,7 @@ public interface TeacherService{
 
     int batchInsert(List<Teacher> list);
 
+    List<Teacher>selectALL();
+    void teacherregisterByteacherID(String teacherId,String name,String password,int role,String sex,String protitle,String phone);
+
 }

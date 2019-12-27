@@ -86,8 +86,8 @@ public class CourseServiceImpl implements CourseService{
         return courseMapper.selectAll();
     }
     @Override
-   public  Course coursedetailinfo(){
-        return courseMapper.coursedetailinfo();
+   public  Course coursedetailinfo(String courseName){
+        return courseMapper.coursedetailinfo(courseName);
     }
 
 }

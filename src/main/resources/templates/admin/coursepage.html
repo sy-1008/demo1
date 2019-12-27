@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>课程管理</title>
-<!--    <link rel="stylesheet" href="../../static/css/layui.css" media="all">-->
+    <link rel="stylesheet" href="../../static/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/css/layui.css">
 
     <meta name="renderer" content="webkit">
@@ -33,7 +33,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="">基础管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="coursepage.html">课程管理</a></dd>
+                        <dd><a href="../admin/coursepage.html">课程管理</a></dd>
                         <dd><a href="../teacher/teacherpage.html">教师管理</a></dd>
                     </dl>
                 </li>
@@ -104,7 +104,7 @@
                     </button>
 
                     <div class="white-box">
-                        <!-- 学期列表 -->
+                        <!-- 课程列表 -->
                         <table class="layui-table page: true">
                             <colgroup>
                                 <col width="100">
@@ -127,11 +127,12 @@
                             </thead>
 
 
-                            <!--/*@thymesVar id="courses" type=""*/-->
+                            <!--/*@thymesVar id="courses" type="" */-->
                             <!--/*@thymesVar id="page" type=""*/-->
                             <tr th:each="course:${page.list}">
-
-                                <td th:text="${course.getCourseName()}"></td>
+                                <td><a th:href="@{'/showcourseinfo?courseName='+${course.getCourseName()}}" th:text="${course.getCourseName()}"></a></td>
+<!--
+<!--                                <td th:text="${course.getCourseName()}"></td>-->
                                 <td th:text="${course.getTerm()}"></td>
                                 <td th:text="${course.getCourseHour()}"></td>
                                 <td></td>
@@ -160,8 +161,8 @@
 
 
 </div>
-<!--<script src="../../static/layui.js" charset="utf-8"></script>-->
-<!--<script src="../../static/layui.all.js" charset="utf-8"></script>-->
+<script src="../../static/layui.js" charset="utf-8"></script>
+<script src="../../static/layui.all.js" charset="utf-8"></script>
 <script src="/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script>

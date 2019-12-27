@@ -5,6 +5,8 @@ import com.suyi.demo.model.TeacherExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface TeacherMapper {
@@ -33,4 +35,8 @@ public interface TeacherMapper {
     int updateBatch(List<Teacher> list);
 
     int batchInsert(@Param("list") List<Teacher> list);
+
+    @ResultMap("BaseResultMap")
+    @Select("select * from sy.teacher")
+    List<Teacher>selectALL();
 }
