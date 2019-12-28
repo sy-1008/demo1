@@ -26,6 +26,7 @@
             </div>
 
             <h4 style="text-align: center"> 你好 你是系统管理员</h4>
+
             <h4 style="text-align: center">欢迎登录</h4>
             <hr class="layui-bg-green">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -33,8 +34,8 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="">基础管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="../admin/coursepage.html">课程管理</a></dd>
-                        <dd><a href="../teacher/teacherpage.html">教师管理</a></dd>
+                        <dd><a href="/coursepage">课程管理</a></dd>
+                        <dd><a href="/teacherpage">教师管理</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -47,17 +48,17 @@
             <br> <br>
             <!--表格内容-->
             <div id="mydiv" style="display: none;padding: 10px">
-                <form class="layui-form" action="">
+                <form class="layui-form" action="/insertcourse" method="post">
                     <div class="layui-form-item">
                         <br>
                         <label class="layui-form-label">课程ID</label>
                         <div class="layui-input-block">
-                            <input readonly type="text" name="couse_id" autocomplete="off" class="layui-input">
+                            <input type="text" name="courseId" autocomplete="off" class="layui-input">
                         </div>
                         <br>
                         <label class="layui-form-label">课程名</label>
                         <div class="layui-input-block">
-                            <input type="text" name="couse_name" autocomplete="off" class="layui-input">
+                            <input type="text" name="courseName" autocomplete="off" class="layui-input">
                         </div>
                         <br>
                         <label class="layui-form-label">开设学期</label>
@@ -65,34 +66,34 @@
                             <input type="text" name="term" l autocomplete="off" class="layui-input">
                         </div>
                         <br>
-                        <label class="layui-form-label">总课时数</label>
+                        <label class="layui-form-label">课时数</label>
                         <div class="layui-input-block">
-                            <input type="text" name="couse_hour" autocomplete="off" class="layui-input">
+                            <input type="text" name="courseHour" autocomplete="off" class="layui-input">
                         </div>
                         <br>
-                        <label class="layui-form-label">主讲教师</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">教师ID</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="teacher_id" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">身份</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">授课学时</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">
-                        </div>
+<!--                        <label class="layui-form-label">主讲教师</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <label class="layui-form-label">教师ID</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input readonly type="text" name="teacherId" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <label class="layui-form-label">身份</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <label class="layui-form-label">授课学时</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
 
                     </div>
                     <div class="layui-row layui-icon-align-center">
-                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*" type="submit">立即提交</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -194,7 +195,7 @@
                 maxmin: true,
                 offset: 'auto',
                 content: $("#mydiv"),
-                area: ['800px', '500px']
+                area: ['700px', '500px']
             });
         })
     });
