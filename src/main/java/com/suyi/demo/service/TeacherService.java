@@ -35,4 +35,5 @@ public interface TeacherService{
     List<Teacher>selectALL();
     void teacherregisterByteacherID(String teacherId,String name,String password,int role,String sex,String protitle,String phone);
 
+    Teacher teacherdetailinfo(String name);
 }

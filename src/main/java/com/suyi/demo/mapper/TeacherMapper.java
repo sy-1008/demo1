@@ -39,4 +39,7 @@ public interface TeacherMapper {
     @ResultMap("BaseResultMap")
     @Select("select * from sy.teacher")
     List<Teacher>selectALL();
+    @ResultMap("BaseResultMap")
+    @Select("select * from sy.teacher where name=#{name}")
+    Teacher teacherdetailinfo(String name);
 }

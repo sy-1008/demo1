@@ -42,9 +42,10 @@ public class loginController<LoginRequest, StatusResponse> {
         }
         // 设置 Session
 
-        HttpSession session = request.getSession();
-
-        session.setAttribute("user", loginUser);
+//        HttpSession session = request.getSession();
+//
+//     session.setAttribute("user", loginUser);
+//model.addAttribute("user",loginUser);
         //根据权限进入不同页面
         if (loginUser.getRole() == 3) {//学生
             return "redirect:/studentpage";
@@ -59,7 +60,7 @@ public class loginController<LoginRequest, StatusResponse> {
         }
         return "common/login.html";
     }
-    
+
 }
 
 

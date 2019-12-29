@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>课程详情</title>
 
-<!--    <link rel="stylesheet" href="../../static/css/layui.css" media="all">-->
+    <link rel="stylesheet" href="../../static/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/css/layui.css">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -66,7 +66,7 @@
                         <label class="layui-form-label">课程名</label>
                         <!--/*@thymesVar id="onecourses" type=""*/-->
                         <div class="layui-input-block" >
-                            <input type="text" name="course_name" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseName()}">
+                            <input type="text" name="courseName" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseName()}">
                         </div>
                         <br>
                         <label class="layui-form-label">开设学期</label>
@@ -76,7 +76,7 @@
                         <br>
                         <label class="layui-form-label">总课时数</label>
                         <div class="layui-input-block">
-                            <input type="text" name="couse_hour" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseHour()}">
+                            <input type="text" name="couseHour" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseHour()}">
                         </div>
                         <br>
                         <label class="layui-form-label">主讲教师</label>
@@ -86,7 +86,7 @@
                         <br>
                         <label class="layui-form-label">教师ID</label>
                         <div class="layui-input-block">
-                            <input readonly type="text" name="teacher_id" autocomplete="off" class="layui-input">
+                            <input readonly type="text" name="teacherId" autocomplete="off" class="layui-input">
                         </div>
                         <br>
                         <label class="layui-form-label">身份</label>
@@ -96,7 +96,7 @@
                         <br>
                         <label class="layui-form-label">授课学时</label>
                         <div class="layui-input-block">
-                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">
+                            <input readonly type="text" name="courseHour" autocomplete="off" class="layui-input">
                         </div>
 
                     </div>
@@ -122,8 +122,8 @@
 </div>
 
 
-<!--<script src="../../static/layui.js" charset="utf-8"></script>-->
-<!--<script src="../../static/layui.all.js" charset="utf-8"></script>-->
+<script src="../../static/layui.js" charset="utf-8"></script>
+<script src="../../static/layui.all.js" charset="utf-8"></script>
 <script src="/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="/layui.all.js" type="text/javascript" charset="utf-8"></script>
 <script>

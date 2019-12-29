@@ -32,8 +32,8 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" >基础管理</a>
                 <dl class="layui-nav-child" >
-                    <dd><a href="../admin/coursepage.html">课程管理</a></dd>
-                    <dd><a href="teacherpage.html">教师管理</a></dd>
+                    <dd><a href="/coursepage">课程管理</a></dd>
+                    <dd><a href="/teacherpage">教师管理</a></dd>
                 </dl>
             </li>
         </ul>
@@ -129,8 +129,8 @@
                         </tr>
                         </thead>
                         <tr th:each="teacher:${page.list}">
-                            <td><a href="teacherdetailinfo.html" th:href="@{/teacherdetailinfo(teacherId=${teacher.name})}" th:text="${teacher.getName()}"></a></td>
-<!--                            <td th:text="${teacher.getName()}"></td>-->
+<!--                            <td><a href="teacherdetailinfo.html" th:href="@{/teacherdetailinfo(teacherId=${teacher.name})}" th:text="${teacher.getName()}"></a></td>-->
+                            <td><a th:href="@{'/showteacherinfo?name='+${teacher.getName()}}" th:text="${teacher.getName()}"></a></td>
                             <td th:text="${teacher.getSex()}"></td>
                             <td th:text="${teacher.getProtitle()}"></td>
                             <td th:text="${teacher.getPhone()}"></td>
@@ -190,7 +190,7 @@
                 maxmin: true,
                 offset: 'auto',
                 content: $("#mydiv"),
-                area: ['800px', '500px']
+                area: ['700px', '500px']
             });
         })
     });

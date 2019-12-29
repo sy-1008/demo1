@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,4 +29,17 @@ public class TeacherController {
         return "/teacher/teacherpage.html";
     }
 
+    /**
+     * 显示教师详细信息
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/showteacherinfo",method= RequestMethod.GET)
+    public String showteacherinfo(Model model, HttpServletRequest request){
+        String teachername=request.getParameter("name");
+        Teacher teacher=teacherService.teacherdetailinfo(teachername);
+        model.addAttribute("oneteacher",teacher);
+        return "teacher/teacherdetailinfo.html";
+    }
 }

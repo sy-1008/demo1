@@ -112,4 +112,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     }
 
+    @Override
+    public Teacher teacherdetailinfo(String name) {
+        return teacherMapper.teacherdetailinfo(name);
+    }
+
 }
