@@ -1,15 +1,13 @@
 package com.suyi.demo.service.impl;
 
 import com.suyi.demo.mapper.UserMapper;
-import com.suyi.demo.model.User;
+import com.suyi.demo.model.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 import com.suyi.demo.mapper.TeacherMapper;
-import com.suyi.demo.model.Teacher;
-import com.suyi.demo.model.TeacherExample;
 import com.suyi.demo.service.TeacherService;
 
 @Service
@@ -116,5 +114,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher teacherdetailinfo(String name) {
         return teacherMapper.teacherdetailinfo(name);
     }
+
+
 
 }

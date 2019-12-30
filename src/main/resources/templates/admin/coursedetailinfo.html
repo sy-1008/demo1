@@ -58,46 +58,61 @@
                 <form class="layui-form" action="">
                     <div class="layui-form-item">
                         <br>
-<!--                        <label class="layui-form-label">课程ID</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input readonly type="text" name="couse_id" autocomplete="off" class="layui-input">-->
-<!--                        </div>-->
+                        <label class="layui-form-label">课程ID</label>
+                        <div class="layui-input-block">
+                            <input readonly type="text" name="courseId" autocomplete="off" class="layui-input" th:value="${course.getCourseId()}">
+                        </div>
                         <br>
                         <label class="layui-form-label">课程名</label>
                         <!--/*@thymesVar id="onecourses" type=""*/-->
                         <div class="layui-input-block" >
-                            <input type="text" name="courseName" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseName()}">
+                            <input type="text" name="courseName" autocomplete="off" class="layui-input" th:value="${course.getCourseName()}" >
                         </div>
                         <br>
                         <label class="layui-form-label">开设学期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="term"  autocomplete="off" class="layui-input" th:value="${onecourses.getTerm()}">
+                            <input type="text" name="term"  autocomplete="off" class="layui-input" th:value="${course.getTerm()}">
                         </div>
                         <br>
                         <label class="layui-form-label">总课时数</label>
                         <div class="layui-input-block">
-                            <input type="text" name="couseHour" autocomplete="off" class="layui-input" th:value="${onecourses.getCourseHour()}">
+                            <input type="text" name="couseHour" autocomplete="off" class="layui-input" th:value="${course.getCourseHour()}">
                         </div>
                         <br>
-                        <label class="layui-form-label">主讲教师</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">教师ID</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="teacherId" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">身份</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">授课学时</label>
-                        <div class="layui-input-block">
-                            <input readonly type="text" name="courseHour" autocomplete="off" class="layui-input">
-                        </div>
+                        <table class="layui-table page: true">
+                            <colgroup>
+                                <col width="100">
+                                <col class="hidden-xs" width="100">
+                                <col class="hidden-xs" width="100">
+                                <col class="hidden-xs" width="100">
+                                <col>
+                                <col width="100">
+                                <col width="130">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th style="width: 200px">教师ID</th>
+
+                                <th style="width: 200px">姓名</th>
+                                <th style="width: 200px">身份</th>
+                                <th style="width: 200px">授课学时</th>
+
+                            </tr>
+                            </thead>
+
+
+                            <!--/*@thymesVar id="courses" type="" */-->
+                            <!--/*@thymesVar id="page" type=""*/-->
+                            <tr th:each="onecourses : ${onecourses}">
+                                <td th:text="${onecourses.getTeacherId()}"></td>
+                                <td th:text="${onecourses.getTeacherName()}"></td>
+
+                                <td th:text="${onecourses.getTeaIdentity()}"></td>
+                                <td th:text="${onecourses.getTeachHour()}"></td>
+
+                            </tr>
+
+                        </table>
 
                     </div>
                     <div class="layui-row layui-icon-align-center" >

@@ -2,8 +2,14 @@ package com.suyi.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.suyi.demo.model.Course;
+import com.suyi.demo.model.Tc;
 import com.suyi.demo.model.Teacher;
+import com.suyi.demo.model.User;
+import com.suyi.demo.service.CourseService;
+import com.suyi.demo.service.TcService;
 import com.suyi.demo.service.TeacherService;
+import com.suyi.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,27 +25,34 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     TeacherService teacherService;
+    @Autowired
+    CourseService courseService;
+    @Autowired
+    TcService tcService;
+    @Autowired
+    UserService userService;
 
-    @RequestMapping(value="/teacherpage")
+    @RequestMapping(value = "/teacherpage")
     public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
-        PageHelper.startPage(start,size,"teacher_id desc");
-        List<Teacher>teachers = teacherService.selectALL();
+        PageHelper.startPage(start, size, "teacher_id desc");
+        List<Teacher> teachers = teacherService.selectALL();
         PageInfo<Teacher> page = new PageInfo<>(teachers);
         m.addAttribute("page", page);
         return "/teacher/teacherpage.html";
     }
 
-    /**
-     * 显示教师详细信息
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/showteacherinfo",method= RequestMethod.GET)
-    public String showteacherinfo(Model model, HttpServletRequest request){
-        String teachername=request.getParameter("name");
-        Teacher teacher=teacherService.teacherdetailinfo(teachername);
-        model.addAttribute("oneteacher",teacher);
-        return "teacher/teacherdetailinfo.html";
+    @RequestMapping(value = "/insertteacher")
+    public String insertTeacher(Teacher teacher, Course course, Tc tc) {
+        User u = new User();
+        u.setUserId(teacher.getTeacherId());
+        u.setPassword("123456");
+        u.setRole(2);
+        userService.insert(u);
+        teacherService.insert(teacher);
+        courseService.insert(course);
+        tcService.insert(tc);
+       return  "redirect:/teacherpage";
     }
+
+
 }

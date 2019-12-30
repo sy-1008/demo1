@@ -26,6 +26,7 @@
             </div>
 
             <h4 style="text-align: center"> 你好 你是系统管理员</h4>
+            <p style="text-align: center" th:text="${loginUser.getUserId()}"></p>
 
             <h4 style="text-align: center">欢迎登录</h4>
             <hr class="layui-bg-green">
@@ -55,6 +56,7 @@
                         <div class="layui-input-block">
                             <input type="text" name="courseId" autocomplete="off" class="layui-input">
                         </div>
+
                         <br>
                         <label class="layui-form-label">课程名</label>
                         <div class="layui-input-block">
@@ -63,7 +65,7 @@
                         <br>
                         <label class="layui-form-label">开设学期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="term" l autocomplete="off" class="layui-input">
+                            <input type="text" name="term" autocomplete="off" class="layui-input">
                         </div>
                         <br>
                         <label class="layui-form-label">课时数</label>
@@ -71,29 +73,30 @@
                             <input type="text" name="courseHour" autocomplete="off" class="layui-input">
                         </div>
                         <br>
-<!--                        <label class="layui-form-label">主讲教师</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <label class="layui-form-label">教师ID</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input readonly type="text" name="teacherId" autocomplete="off" class="layui-input">-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <label class="layui-form-label">身份</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <label class="layui-form-label">授课学时</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">-->
-<!--                        </div>-->
+                        <!--                        <label class="layui-form-label">主讲教师</label>-->
+                        <!--                        <div class="layui-input-block">-->
+                        <!--                            <input readonly type="text" name="name" autocomplete="off" class="layui-input">-->
+                        <!--                        </div>-->
+                        <!--                        <br>-->
+                        <!--                        <label class="layui-form-label">教师ID</label>-->
+                        <!--                        <div class="layui-input-block">-->
+                        <!--                            <input readonly type="text" name="teacherId" autocomplete="off" class="layui-input">-->
+                        <!--                        </div>-->
+                        <!--                        <br>-->
+                        <!--                        <label class="layui-form-label">身份</label>-->
+                        <!--                        <div class="layui-input-block">-->
+                        <!--                            <input readonly type="text" name="identity" autocomplete="off" class="layui-input">-->
+                        <!--                        </div>-->
+                        <!--                        <br>-->
+                        <!--                        <label class="layui-form-label">授课学时</label>-->
+                        <!--                        <div class="layui-input-block">-->
+                        <!--                            <input readonly type="text" name="course_hour" autocomplete="off" class="layui-input">-->
+                        <!--                        </div>-->
 
                     </div>
                     <div class="layui-row layui-icon-align-center">
-                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*" type="submit">立即提交</button>
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*" type="submit">立即提交
+                        </button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -118,7 +121,7 @@
                             </colgroup>
                             <thead>
                             <tr>
-
+                                <th style="width: 200px">课程ID</th>
 
                                 <th style="width: 200px">课程名</th>
                                 <th style="width: 200px">开设学期</th>
@@ -131,22 +134,27 @@
                             <!--/*@thymesVar id="courses" type="" */-->
                             <!--/*@thymesVar id="page" type=""*/-->
                             <tr th:each="course:${page.list}">
-                                <td><a th:href="@{'/showcourseinfo?courseName='+${course.getCourseName()}}" th:text="${course.getCourseName()}"></a></td>
-<!--
-<!--                                <td th:text="${course.getCourseName()}"></td>-->
+                                <td th:text="${course.getCourseId()}"></td>
+                                <td><a th:href="@{'/showcourseinfo?courseName='+${course.getCourseName()}}"
+                                       th:text="${course.getCourseName()}"></a></td>
+
                                 <td th:text="${course.getTerm()}"></td>
                                 <td th:text="${course.getCourseHour()}"></td>
-                                <td></td>
+                                <td th:text="${course.getTeacherName()}"></td>
                             </tr>
 
                         </table>
                         <br/>
 
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/coursepage(start=0)}">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/coursepage(start=${page.pageNum-1})}">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/coursepage(start=${page.pageNum+1})}">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/coursepage(start=${page.pages})}">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/coursepage(start=0)}">首 页</a>
+                            </button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
+                                th:href="@{/coursepage(start=${page.pageNum-1})}">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
+                                th:href="@{/coursepage(start=${page.pageNum+1})}">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/coursepage(start=${page.pages})}">末
+                                页</a></button>
                         </div>
 
                     </div>

@@ -23,38 +23,25 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    /**
-     * 显示课程详细信息
-     *
-     * @param model
-     * @return
-     */
 
-    @RequestMapping(value = "/showcourseinfo", method = RequestMethod.GET)
-    public String showcourseinfo(Model model, HttpServletRequest request) {
-        String courseName = request.getParameter("courseName");
-        Course course = courseService.coursedetailinfo(courseName);
-        model.addAttribute("onecourses", course);
-        return "admin/coursedetailinfo.html";
-    }
 
-    /**
-     * 显示全部课程信息
-     *
-     * @param m
-     * @param start
-     * @param size
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/coursepage")
-    public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
-        PageHelper.startPage(start, size, "course_id desc");
-        List<Course> courses = courseService.selectAll();
-        PageInfo<Course> page = new PageInfo<>(courses);
-        m.addAttribute("page", page);
-        return "/admin/coursepage.html";
-    }
+//    @RequestMapping(value = "/showcourseinfo", method = RequestMethod.GET)
+//    public String showcourseinfo(Model model, HttpServletRequest request) {
+//        String courseName = request.getParameter("courseName");
+//        Course course = courseService.coursedetailinfo(courseName);
+//        model.addAttribute("onecourses", course);
+//        return "admin/coursedetailinfo.html";
+//    }
+
+
+//    @RequestMapping(value = "/coursepage")
+//    public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+//        PageHelper.startPage(start, size, "course_id desc");
+//        List<Course> courses = courseService.selectAll();
+//        PageInfo<Course> page = new PageInfo<>(courses);
+//        m.addAttribute("page", page);
+//        return "/admin/coursepage.html";
+//    }
 @RequestMapping(value = "/insertcourse",method = RequestMethod.POST)
     public String insertCourse(Course course) {
         courseService.insert(course);

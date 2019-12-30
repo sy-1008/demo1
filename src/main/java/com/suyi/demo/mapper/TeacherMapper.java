@@ -1,12 +1,10 @@
 package com.suyi.demo.mapper;
 
-import com.suyi.demo.model.Teacher;
-import com.suyi.demo.model.TeacherExample;
+import com.suyi.demo.model.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface TeacherMapper {
@@ -42,4 +40,15 @@ public interface TeacherMapper {
     @ResultMap("BaseResultMap")
     @Select("select * from sy.teacher where name=#{name}")
     Teacher teacherdetailinfo(String name);
+
+//    /**
+//     * 管理员或教师用户登录名
+//     * @param user
+//     * @return
+//     */
+//    @ResultMap("BaseResultMap")
+//    @Select("select  * from sy.teacher where teacher_id=#{user.getUserId()}")
+//    Teacher FindteacherName(User user);
+
+
 }

@@ -1,8 +1,10 @@
 package com.suyi.demo.service;
 
 import java.util.List;
-import com.suyi.demo.model.Teacher;
-import com.suyi.demo.model.TeacherExample;
+
+import com.suyi.demo.model.*;
+import org.omg.CORBA.TCKind;
+
 public interface TeacherService{
 
 
@@ -36,4 +38,6 @@ public interface TeacherService{
     void teacherregisterByteacherID(String teacherId,String name,String password,int role,String sex,String protitle,String phone);
 
     Teacher teacherdetailinfo(String name);
+
+
 }
