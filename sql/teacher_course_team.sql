@@ -1,4 +1,4 @@
-CREATE VIEW teacher_course
+CREATE VIEW teacher_course_team
             (teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, course_name, term,
              course_hour, tea_identity, teach_hour)
 AS
@@ -20,4 +20,4 @@ FROM sy.teacher
          LEFT OUTER JOIN sy.course
                          ON sy.tc.course_id = sy.course.course_id
 
-WHERE sy.tc.tea_identity = '主讲教师'
+WHERE sy.tc.tea_identity = '团队教师'

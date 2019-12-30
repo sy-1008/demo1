@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suyi.demo.mapper.TeacherCourseMainTeamMapper">
+  <resultMap id="BaseResultMap" type="com.suyi.demo.model.TeacherCourseMainTeam">
+    <!--@mbg.generated-->
+    <!--@Table sy.teacher_course_main_team-->
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="term" jdbcType="VARCHAR" property="term" />
+    <result column="course_hour" jdbcType="INTEGER" property="courseHour" />
+    <result column="tea_identity_main" jdbcType="VARCHAR" property="teaIdentityMain" />
+    <result column="teacher_team_id" jdbcType="VARCHAR" property="teacherTeamId" />
+    <result column="teacher_team_name" jdbcType="VARCHAR" property="teacherTeamName" />
+    <result column="teacher_course_team" jdbcType="VARCHAR" property="teacherCourseTeam" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    teacher_id, teacher_name, course_id, course_name, term, course_hour, tea_identity_main, 
+    teacher_team_id, teacher_team_name, teacher_course_team
+  </sql>
+  <select id="selectByExample" parameterType="com.suyi.demo.model.TeacherCourseMainTeamExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sy.teacher_course_main_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.suyi.demo.model.TeacherCourseMainTeamExample">
+    <!--@mbg.generated-->
+    delete from sy.teacher_course_main_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.suyi.demo.model.TeacherCourseMainTeam">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_main_team (teacher_id, teacher_name, course_id, 
+      course_name, term, course_hour, 
+      tea_identity_main, teacher_team_id, teacher_team_name, 
+      teacher_course_team)
+    values (#{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, 
+      #{courseName,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, #{courseHour,jdbcType=INTEGER}, 
+      #{teaIdentityMain,jdbcType=VARCHAR}, #{teacherTeamId,jdbcType=VARCHAR}, #{teacherTeamName,jdbcType=VARCHAR}, 
+      #{teacherCourseTeam,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suyi.demo.model.TeacherCourseMainTeam">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_main_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="term != null">
+        term,
+      </if>
+      <if test="courseHour != null">
+        course_hour,
+      </if>
+      <if test="teaIdentityMain != null">
+        tea_identity_main,
+      </if>
+      <if test="teacherTeamId != null">
+        teacher_team_id,
+      </if>
+      <if test="teacherTeamName != null">
+        teacher_team_name,
+      </if>
+      <if test="teacherCourseTeam != null">
+        teacher_course_team,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="courseHour != null">
+        #{courseHour,jdbcType=INTEGER},
+      </if>
+      <if test="teaIdentityMain != null">
+        #{teaIdentityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTeamId != null">
+        #{teacherTeamId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTeamName != null">
+        #{teacherTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherCourseTeam != null">
+        #{teacherCourseTeam,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.suyi.demo.model.TeacherCourseMainTeamExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from sy.teacher_course_main_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update sy.teacher_course_main_team
+    <set>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherName != null">
+        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseName != null">
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.term != null">
+        term = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseHour != null">
+        course_hour = #{record.courseHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.teaIdentityMain != null">
+        tea_identity_main = #{record.teaIdentityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherTeamId != null">
+        teacher_team_id = #{record.teacherTeamId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherTeamName != null">
+        teacher_team_name = #{record.teacherTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherCourseTeam != null">
+        teacher_course_team = #{record.teacherCourseTeam,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update sy.teacher_course_main_team
+    set teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      course_id = #{record.courseId,jdbcType=VARCHAR},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      term = #{record.term,jdbcType=VARCHAR},
+      course_hour = #{record.courseHour,jdbcType=INTEGER},
+      tea_identity_main = #{record.teaIdentityMain,jdbcType=VARCHAR},
+      teacher_team_id = #{record.teacherTeamId,jdbcType=VARCHAR},
+      teacher_team_name = #{record.teacherTeamName,jdbcType=VARCHAR},
+      teacher_course_team = #{record.teacherCourseTeam,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_main_team
+    (teacher_id, teacher_name, course_id, course_name, term, course_hour, tea_identity_main, 
+      teacher_team_id, teacher_team_name, teacher_course_team)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.teacherId,jdbcType=VARCHAR}, #{item.teacherName,jdbcType=VARCHAR}, #{item.courseId,jdbcType=VARCHAR}, 
+        #{item.courseName,jdbcType=VARCHAR}, #{item.term,jdbcType=VARCHAR}, #{item.courseHour,jdbcType=INTEGER}, 
+        #{item.teaIdentityMain,jdbcType=VARCHAR}, #{item.teacherTeamId,jdbcType=VARCHAR}, 
+        #{item.teacherTeamName,jdbcType=VARCHAR}, #{item.teacherCourseTeam,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+</mapper>

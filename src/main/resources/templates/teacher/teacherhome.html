@@ -41,10 +41,9 @@
                 <div class="page-content-wrap">
 
                     <div class="white-box">
-                        <table class="layui-table page:true">
+                        <table class="layui-table page: true">
                             <colgroup>
                                 <col width="100">
-                                <col class="hidden-xs" width="100">
                                 <col class="hidden-xs" width="100">
                                 <col class="hidden-xs" width="100">
                                 <col class="hidden-xs" width="100">
@@ -54,34 +53,41 @@
                             </colgroup>
                             <thead>
                             <tr>
-
-
-
                                 <th style="width: 200px">课程ID</th>
                                 <th style="width: 200px">课程名</th>
                                 <th style="width: 200px">开设学期</th>
                                 <th style="width: 200px">总课时数</th>
+
                                 <th style="width: 200px">主讲教师姓名</th>
+                                <th style="width: 200px">团队教师姓名</th>
 
                             </tr>
                             </thead>
-                            <tr th:each="teachertc:${page.list}">
-                                <!--                            <td><a href="teacherdetailinfo.html" th:href="@{/teacherdetailinfo(teacherId=${teacher.name})}" th:text="${teacher.getName()}"></a></td>-->
-<!--                                <td><a th:href="@{'/teacherhome?courseName='+${course.getCourseName()}}" th:text="${teacher.getName()}"></a></td>-->
-                                <td th:text="${teachertc.getCourseId()}"></td>
-                                <td th:text="${teachertc.getCourseName()}"></td>
-                                <td th:text="${teachertc.getCourseHour()}"></td>
-                                <td th:text="${teachertc.getName()}"></td>
+                            <tbody>
+
+                            <!--/*@thymesVar id="courses" type="" */-->
+                            <!--/*@thymesVar id="page" type=""*/-->
+                            <tr th:each="oneteacher : ${page.list}">
+                                <td th:text="${oneteacher.getCourseId()}"></td>
+                                <td><a th:href="@{'/showstudentlist?courseName='+${oneteacher.getCourseName()}}"
+                                       th:text="${oneteacher.getCourseName()}"></a></td>
+<!--                                <td th:text="${oneteacher.getCourseName()}"></td>-->
+
+                                <td th:text="${oneteacher.getTerm()}"></td>
+                                <td th:text="${oneteacher.getCourseHour()}"></td>
+
+                                <td th:text="${oneteacher.getTeacherName()}"></td>
+                                <td th:text="${oneteacher.getTeacherTeamName()}"></td>
                             </tr>
-
-
+                            </tbody>
                         </table>
+
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/teacherpage(start=0)}">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherpage(start=${page.pageNum-1})}">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherpage(start=${page.pageNum+1})}">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/teacherpage(start=${page.pages})}">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=0)}">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum-1})}">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum+1})}">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/teacherhome(start=${page.pages})}">末 页</a></button>
                         </div>
                     </div>
                 </div>

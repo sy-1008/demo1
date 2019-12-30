@@ -2,14 +2,8 @@ package com.suyi.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.suyi.demo.model.Course;
-import com.suyi.demo.model.Tc;
-import com.suyi.demo.model.Teacher;
-import com.suyi.demo.model.User;
-import com.suyi.demo.service.CourseService;
-import com.suyi.demo.service.TcService;
-import com.suyi.demo.service.TeacherService;
-import com.suyi.demo.service.UserService;
+import com.suyi.demo.model.*;
+import com.suyi.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -31,6 +26,10 @@ public class TeacherController {
     TcService tcService;
     @Autowired
     UserService userService;
+    @Autowired
+    TeacherCourseAllService teacherCourseAllService;
+    @Autowired
+    TeacherCourseMainTeamService teacherCourseMainTeamService;
 
     @RequestMapping(value = "/teacherpage")
     public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
@@ -51,8 +50,33 @@ public class TeacherController {
         teacherService.insert(teacher);
         courseService.insert(course);
         tcService.insert(tc);
-       return  "redirect:/teacherpage";
+        return "redirect:/teacherpage";
     }
+
+    /**
+     * 显示一个教师所授课程列表
+     *
+     * @param m
+     * @return
+     */
+    @RequestMapping(value = "/teacherhome")
+    public String selectteacher(Model m, HttpSession session, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user = (User) session.getAttribute("user");
+        TeacherCourseMainTeamExample example = new TeacherCourseMainTeamExample();
+        example.or().andTeacherIdEqualTo(user.getUserId());
+        example.or().andTeacherTeamIdEqualTo(user.getUserId());
+        //example.createCriteria().andTeacherIdEqualTo(user.getUserId());
+
+        List<TeacherCourseMainTeam> teacherCourseMainTeams = teacherCourseMainTeamService.selectByExample(example);
+
+//        List<TeacherCourseAll>teacherCourseAlls=teacherCourseAllService.teacherdetailinfo(teacher.getName());
+        PageInfo<TeacherCourseMainTeam> page = new PageInfo<>(teacherCourseMainTeams);
+        m.addAttribute("page", page);
+//        m.addAttribute("courses",teacherCourseMainTeams);
+        return "/teacher/teacherhome.html";
+    }
+
+
 
 
 }
