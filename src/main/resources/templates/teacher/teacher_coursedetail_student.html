@@ -34,8 +34,8 @@
                     <dl class="layui-nav-child" >
                         <dd><a th:href="@{/showstudentlist(courseName=${weilecoursename.getCourseName()})}">学生管理</a></dd>
 
-                        <dd><a href="/teacherpage">选题管理</a></dd>
-                        <dd><a href="/teacherpage">教师管理</a></dd>
+                        <dd><a th:href="@{/showtopiclistBycourseName(courseName=${weilecoursename.getCourseName()})}">选题管理</a></dd>
+                        <dd><a th:href="@{/showteacherinfobycourseName(courseName=${weilecoursename.getCourseName()})}">教师管理</a></dd>
                     </dl>
                 </li>
             </ul>

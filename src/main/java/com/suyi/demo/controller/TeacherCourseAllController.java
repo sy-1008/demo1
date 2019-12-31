@@ -3,6 +3,7 @@ package com.suyi.demo.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.suyi.demo.model.TeacherCourseAll;
+import com.suyi.demo.model.TeacherCourseAllExample;
 import com.suyi.demo.service.TeacherCourseAllService;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,4 +63,27 @@ public class TeacherCourseAllController {
         model.addAttribute("teacher",t);
         return "teacher/teacherdetailinfo.html";
     }
+
+    /**
+     * 显示一门课程的所有授课教师信息
+     * @param model
+     * @param request
+     * @param start
+     * @param size
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/showteacherinfobycourseName",method = RequestMethod.GET)
+    public String showteacherinfoByCourseName(Model model,HttpServletRequest request,@RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception
+    {
+        PageHelper.startPage(start, size, "teacher_id desc");
+        String courseName=request.getParameter("courseName");
+        TeacherCourseAllExample example=new TeacherCourseAllExample();
+        example.createCriteria().andCourseNameEqualTo(courseName);
+        List<TeacherCourseAll>teacherCourseAlls=teacherCourseAllService.selectByExample(example);
+        PageInfo<TeacherCourseAll>page=new PageInfo<>(teacherCourseAlls);
+        model.addAttribute("page", page);
+        return "/teacher/teacher_coursedetail_teacher.html";
+    }
+
 }
