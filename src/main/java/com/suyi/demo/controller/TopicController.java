@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.suyi.demo.model.*;
 import com.suyi.demo.service.CourseService;
+import com.suyi.demo.service.StutopicTopicTeacherService;
 import com.suyi.demo.service.TeacherCourseTopicService;
 import com.suyi.demo.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import java.util.List;
 public class TopicController {
    @Autowired
     TeacherCourseTopicService teacherCourseTopicService;
-
+@Autowired
+    StutopicTopicTeacherService stutopicTopicTeacherService;
     /**
      * 显示一门课程下 主题list
      * @param model
@@ -42,8 +44,13 @@ public class TopicController {
 
         PageInfo<TeacherCourseTopic>page=new PageInfo<>(teacherCourseTopics);
         model.addAttribute("page",page);
-
+        //设置model 为了courseName
+TeacherCourseTopic teacherCourseTopic=teacherCourseTopics.get(0);
+model.addAttribute("weilecoursename",teacherCourseTopic);
         return "teacher/teacher_coursedetail_topic.html";
 
     }
+
+
+
 }

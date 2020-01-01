@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suyi.demo.mapper.TeacherCourseTopicMapper">
+  <resultMap id="BaseResultMap" type="com.suyi.demo.model.TeacherCourseTopic">
+    <!--@mbg.generated-->
+    <!--@Table sy.teacher_course_topic-->
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_sex" jdbcType="CHAR" property="teacherSex" />
+    <result column="teacher_protitle" jdbcType="VARCHAR" property="teacherProtitle" />
+    <result column="teacher_phone" jdbcType="VARCHAR" property="teacherPhone" />
+    <result column="course_id" jdbcType="VARCHAR" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="term" jdbcType="VARCHAR" property="term" />
+    <result column="course_hour" jdbcType="INTEGER" property="courseHour" />
+    <result column="topic_id" jdbcType="VARCHAR" property="topicId" />
+    <result column="topic" jdbcType="VARCHAR" property="topic" />
+    <result column="topic_keyword" jdbcType="VARCHAR" property="topicKeyword" />
+    <result column="topic_creation_time" jdbcType="TIMESTAMP" property="topicCreationTime" />
+    <result column="topic_student_num" jdbcType="INTEGER" property="topicStudentNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, 
+    course_name, term, course_hour, topic_id, topic, topic_keyword, topic_creation_time, 
+    topic_student_num
+  </sql>
+  <select id="selectByExample" parameterType="com.suyi.demo.model.TeacherCourseTopicExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sy.teacher_course_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.suyi.demo.model.TeacherCourseTopicExample">
+    <!--@mbg.generated-->
+    delete from sy.teacher_course_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.suyi.demo.model.TeacherCourseTopic">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_topic (teacher_id, teacher_name, teacher_sex, 
+      teacher_protitle, teacher_phone, course_id, 
+      course_name, term, course_hour, 
+      topic_id, topic, topic_keyword, 
+      topic_creation_time, topic_student_num)
+    values (#{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, #{teacherSex,jdbcType=CHAR}, 
+      #{teacherProtitle,jdbcType=VARCHAR}, #{teacherPhone,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, 
+      #{courseName,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, #{courseHour,jdbcType=INTEGER}, 
+      #{topicId,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{topicKeyword,jdbcType=VARCHAR}, 
+      #{topicCreationTime,jdbcType=TIMESTAMP}, #{topicStudentNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.suyi.demo.model.TeacherCourseTopic">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="teacherSex != null">
+        teacher_sex,
+      </if>
+      <if test="teacherProtitle != null">
+        teacher_protitle,
+      </if>
+      <if test="teacherPhone != null">
+        teacher_phone,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="term != null">
+        term,
+      </if>
+      <if test="courseHour != null">
+        course_hour,
+      </if>
+      <if test="topicId != null">
+        topic_id,
+      </if>
+      <if test="topic != null">
+        topic,
+      </if>
+      <if test="topicKeyword != null">
+        topic_keyword,
+      </if>
+      <if test="topicCreationTime != null">
+        topic_creation_time,
+      </if>
+      <if test="topicStudentNum != null">
+        topic_student_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherSex != null">
+        #{teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="teacherProtitle != null">
+        #{teacherProtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPhone != null">
+        #{teacherPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="courseHour != null">
+        #{courseHour,jdbcType=INTEGER},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="topic != null">
+        #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="topicKeyword != null">
+        #{topicKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCreationTime != null">
+        #{topicCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicStudentNum != null">
+        #{topicStudentNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.suyi.demo.model.TeacherCourseTopicExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from sy.teacher_course_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update sy.teacher_course_topic
+    <set>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherName != null">
+        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherSex != null">
+        teacher_sex = #{record.teacherSex,jdbcType=CHAR},
+      </if>
+      <if test="record.teacherProtitle != null">
+        teacher_protitle = #{record.teacherProtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherPhone != null">
+        teacher_phone = #{record.teacherPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseName != null">
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.term != null">
+        term = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseHour != null">
+        course_hour = #{record.courseHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicId != null">
+        topic_id = #{record.topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topic != null">
+        topic = #{record.topic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicKeyword != null">
+        topic_keyword = #{record.topicKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicCreationTime != null">
+        topic_creation_time = #{record.topicCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.topicStudentNum != null">
+        topic_student_num = #{record.topicStudentNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update sy.teacher_course_topic
+    set teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      teacher_sex = #{record.teacherSex,jdbcType=CHAR},
+      teacher_protitle = #{record.teacherProtitle,jdbcType=VARCHAR},
+      teacher_phone = #{record.teacherPhone,jdbcType=VARCHAR},
+      course_id = #{record.courseId,jdbcType=VARCHAR},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      term = #{record.term,jdbcType=VARCHAR},
+      course_hour = #{record.courseHour,jdbcType=INTEGER},
+      topic_id = #{record.topicId,jdbcType=VARCHAR},
+      topic = #{record.topic,jdbcType=VARCHAR},
+      topic_keyword = #{record.topicKeyword,jdbcType=VARCHAR},
+      topic_creation_time = #{record.topicCreationTime,jdbcType=TIMESTAMP},
+      topic_student_num = #{record.topicStudentNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into sy.teacher_course_topic
+    (teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, 
+      course_name, term, course_hour, topic_id, topic, topic_keyword, topic_creation_time, 
+      topic_student_num)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.teacherId,jdbcType=VARCHAR}, #{item.teacherName,jdbcType=VARCHAR}, #{item.teacherSex,jdbcType=CHAR}, 
+        #{item.teacherProtitle,jdbcType=VARCHAR}, #{item.teacherPhone,jdbcType=VARCHAR}, 
+        #{item.courseId,jdbcType=VARCHAR}, #{item.courseName,jdbcType=VARCHAR}, #{item.term,jdbcType=VARCHAR}, 
+        #{item.courseHour,jdbcType=INTEGER}, #{item.topicId,jdbcType=VARCHAR}, #{item.topic,jdbcType=VARCHAR}, 
+        #{item.topicKeyword,jdbcType=VARCHAR}, #{item.topicCreationTime,jdbcType=TIMESTAMP}, 
+        #{item.topicStudentNum,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+</mapper>

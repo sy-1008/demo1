@@ -83,6 +83,8 @@ public class TeacherCourseAllController {
         List<TeacherCourseAll>teacherCourseAlls=teacherCourseAllService.selectByExample(example);
         PageInfo<TeacherCourseAll>page=new PageInfo<>(teacherCourseAlls);
         model.addAttribute("page", page);
+        TeacherCourseAll teacherCourseAll=teacherCourseAlls.get(0);
+        model.addAttribute("weilecoursename",teacherCourseAll);
         return "/teacher/teacher_coursedetail_teacher.html";
     }
 

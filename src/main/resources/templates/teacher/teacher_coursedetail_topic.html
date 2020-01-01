@@ -32,9 +32,9 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" >基础管理</a>
                     <dl class="layui-nav-child" >
-<!--                        <dd><a th:href="@{/showstudentlist(courseName=${weilecoursename.getCourseName()})}">学生管理</a></dd>-->
-<!--                        <dd><a th:href="@{/showtopiclistBycourseName(courseName=${weilecoursename.getCourseName()})}">选题管理</a></dd>-->
-<!--                        <dd><a th:href="@{/showteacherinfobycourseName(courseName=${weilecoursename.getCourseName()})}">教师管理</a></dd>-->
+                        <dd><a th:href="@{/showstudentlist(courseName=${weilecoursename.getCourseName()})}">学生管理</a></dd>
+                        <dd><a th:href="@{/showtopiclistBycourseName(courseName=${weilecoursename.getCourseName()})}">选题管理</a></dd>
+                        <dd><a th:href="@{/showteacherinfobycourseName(courseName=${weilecoursename.getCourseName()})}">教师管理</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -50,8 +50,6 @@
                 <div class="page-content-wrap">
                     <div class="layui-inline">
                         <button class="layui-btn layui-btn-molv" data-id="1" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>
-                        <button class="layui-btn layui-btn-molv" data-id="7" data-url="menu-add.html"><i class="layui-icon">&#xe642;</i></button>
-                        <button class="layui-btn layui-btn-molv" data-id="7" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button>
                     </div>
                     <div class="white-box">
                         <table class="layui-table page:true">
@@ -93,10 +91,10 @@
                         </table>
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=0)}">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum-1})}">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum+1})}">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showtopiclistBycourseName(start=${page.pages})}">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=0)}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum-1})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum+1})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showtopiclistBycourseName(start=${page.pages})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>
