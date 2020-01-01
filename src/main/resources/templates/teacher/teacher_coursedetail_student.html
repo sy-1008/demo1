@@ -80,9 +80,10 @@
                             </tr>
                             </thead>
                             <tr th:each="student:${page.list}">
-                                <!--                            <td><a href="teacherdetailinfo.html" th:href="@{/teacherdetailinfo(teacherId=${teacher.name})}" th:text="${teacher.getName()}"></a></td>-->
-<!--                                <td><a th:href="@{'/showteacherinfo?name='+${student.getStudentId()}}" th:text="${teacher.getName()}"></a></td>-->
-                                <td th:text="${student.getStudentId()}"></td>
+
+<!--                                <td th:text="${student.getStudentId()}"></td>-->
+                                <td><a th:href="@{'/showstutopiclistBystudentId?studentId='+${student.getStudentId()}}"
+                                       th:text="${student.getStudentId()}"></a></td>
                                 <td th:text="${student.getStudentName()}"></td>
                                 <td th:text="${student.getStudentSex()}"></td>
                                 <td th:text="${student.getStudentMajor()}"></td>
