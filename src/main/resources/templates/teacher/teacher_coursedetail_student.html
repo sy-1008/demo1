@@ -32,10 +32,10 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" >基础管理</a>
                     <dl class="layui-nav-child" >
-                        <dd><a th:href="@{/showstudentlist(courseName=${weilecoursename.getCourseName()})}">学生管理</a></dd>
+                        <dd><a th:href="@{/showstudentlist(courseId=${weilecourseId.getCourseId()})}">学生管理</a></dd>
 
-                        <dd><a th:href="@{/showtopiclistBycourseName(courseName=${weilecoursename.getCourseName()})}">选题管理</a></dd>
-                        <dd><a th:href="@{/showteacherinfobycourseName(courseName=${weilecoursename.getCourseName()})}">教师管理</a></dd>
+                        <dd><a th:href="@{/showtopiclistBycourseName(courseId=${weilecourseId.getCourseId()})}">选题管理</a></dd>
+                        <dd><a th:href="@{/showteacherinfobycourseName(courseId=${weilecourseId.getCourseId()})}">教师管理</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -94,10 +94,10 @@
                         </table>
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=0)}">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=${page.pageNum-1})}">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=${page.pageNum+1})}">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showstudentlist(start=${page.pages})}">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=0,courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=${page.pageNum-1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstudentlist(start=${page.pageNum+1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showstudentlist(start=${page.pages},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>

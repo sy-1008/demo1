@@ -77,14 +77,14 @@ public class TeacherCourseAllController {
     public String showteacherinfoByCourseName(Model model,HttpServletRequest request,@RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception
     {
         PageHelper.startPage(start, size, "teacher_id desc");
-        String courseName=request.getParameter("courseName");
+        String courseId=request.getParameter("courseId");
         TeacherCourseAllExample example=new TeacherCourseAllExample();
-        example.createCriteria().andCourseNameEqualTo(courseName);
+        example.createCriteria().andCourseIdEqualTo(courseId);
         List<TeacherCourseAll>teacherCourseAlls=teacherCourseAllService.selectByExample(example);
         PageInfo<TeacherCourseAll>page=new PageInfo<>(teacherCourseAlls);
         model.addAttribute("page", page);
         TeacherCourseAll teacherCourseAll=teacherCourseAlls.get(0);
-        model.addAttribute("weilecoursename",teacherCourseAll);
+        model.addAttribute("weilecourseId",teacherCourseAll);
         return "/teacher/teacher_coursedetail_teacher.html";
     }
 

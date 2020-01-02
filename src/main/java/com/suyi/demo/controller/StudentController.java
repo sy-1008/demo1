@@ -39,18 +39,18 @@ private PaperService paperService;
     public String showstudentlistBycourseId(Model model, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception
     {
         PageHelper.startPage(start, size, "course_id desc");
-        String courseName=request.getParameter("courseName");
+        String courseId=request.getParameter("courseId");
         //设置session
 //        HttpSession session=request.getSession();
 //        session.setAttribute("courseName",courseName);
 //        courseName= (String) session.getAttribute("courseName");
         StudentCourseExample example=new StudentCourseExample();
-        example.createCriteria().andCourseNameEqualTo(courseName);
+        example.createCriteria().andCourseIdEqualTo(courseId);
         List<StudentCourse>studentCourses=studentCourseService.selectByExample(example);
         PageInfo<StudentCourse>page=new PageInfo<>(studentCourses);
         model.addAttribute("page", page);
         StudentCourse studentCourse=studentCourses.get(0);
-        model.addAttribute("weilecoursename",studentCourse);
+        model.addAttribute("weilecourseId",studentCourse);
         return "teacher/teacher_coursedetail_student.html";
 
     }
@@ -79,6 +79,9 @@ public String showstutopiclistBystudentId(Model model, HttpServletRequest reques
     example.createCriteria().andStudentIdEqualTo(studentId);
     List<Paper>papers=paperService.selectByExample(example);
     model.addAttribute("paper",papers);
+    //获取studentId
+    Paper paper=papers.get(0);
+    model.addAttribute("paper",paper);
     return "teacher/teacher_coursedetail_student_stutopic.html";
 }
 

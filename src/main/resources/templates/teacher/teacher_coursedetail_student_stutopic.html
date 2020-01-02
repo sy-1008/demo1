@@ -89,10 +89,10 @@
                         </table>
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}"style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small" > <a th:href="@{/showstutopiclistBystudentId(start=${page.pages})}" style="color: #F8F8F8">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0,studentId=${paper.getStudentId()})}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small" > <a th:href="@{/showstutopiclistBystudentId(start=${page.pages},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                         <br>
                         <blockquote class="layui-elem-quote">论文列表</blockquote>
@@ -140,10 +140,10 @@
 
                         </table>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}" style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showstutopiclistBystudentId(start=${page.pages})}" style="color: #F8F8F8">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0,studentId=${paper.getStudentId()})}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showstutopiclistBystudentId(start=${page.pages},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>

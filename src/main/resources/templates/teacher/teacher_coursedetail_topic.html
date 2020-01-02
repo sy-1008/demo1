@@ -32,9 +32,9 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" >基础管理</a>
                     <dl class="layui-nav-child" >
-                        <dd><a th:href="@{/showstudentlist(courseName=${weilecoursename.getCourseName()})}">学生管理</a></dd>
-                        <dd><a th:href="@{/showtopiclistBycourseName(courseName=${weilecoursename.getCourseName()})}">选题管理</a></dd>
-                        <dd><a th:href="@{/showteacherinfobycourseName(courseName=${weilecoursename.getCourseName()})}">教师管理</a></dd>
+                        <dd><a th:href="@{/showstudentlist(courseId=${weilecourseId.getCourseId()})}">学生管理</a></dd>
+                        <dd><a th:href="@{/showtopiclistBycourseName(courseId=${weilecourseId.getCourseId()})}">选题管理</a></dd>
+                        <dd><a th:href="@{/showteacherinfobycourseName(courseId=${weilecourseId.getCourseId()})}">教师管理</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -45,11 +45,67 @@
             <!-- 内容主体区域 -->
             <div class="layui-bg-green" style=" font-size: 20px; padding: 15px;">学生管理</div>
             <br> <br>
+            <!--表格内容-->
+            <div id="mydiv" style="display: none;padding: 10px">
+                <form class="layui-form" action="/inserttopic" method="post">
+                    <div class="layui-form-item">
+                        <br>
 
+                            <input   type="hidden" name="url" th:value="${weilecourseId.getCourseId()}" autocomplete="off" class="layui-input" >
+
+                        <br>
+                        <label class="layui-form-label">课程ID</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="courseId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">主题ID</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="topicId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">主题名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="topic" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">关键词</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="keyword" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <br>
+                        <label class="layui-form-label">出题教师ID</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="teacherId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">创建时间</label>
+                        <div class="layui-inline">
+                            <input type="text" name="creationTime" class="layui-input" id="test1">
+                        </div>
+
+                        <br>
+                        <label class="layui-form-label">选题人数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="studentNum" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    <div class="layui-row layui-icon-align-center">
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </form>
+            </div>
             <div class="layui-container">
                 <div class="page-content-wrap">
                     <div class="layui-inline">
-                        <button class="layui-btn layui-btn-molv" data-id="1" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>
+                        <button type="button" id="btn2" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe654;</i>
+                        </button>
+<!--                        <button class="layui-btn layui-btn-molv" data-id="1" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>-->
                     </div>
                     <div class="white-box">
                         <table class="layui-table page:true">
@@ -80,7 +136,9 @@
                             <tr th:each="topic:${page.list}">
 
                                 <td th:text="${topic.getTopicId()}"></td>
-                                <td th:text="${topic.getTopic()}"></td>
+                                <td><a th:href="@{'/showtopicdetail?topic='+${topic.getTopicId()}}"
+                                       th:text="${topic.getTopic()}"></a></td>
+<!--                                <td th:text="${topic.getTopic()}"></td>-->
                                 <td th:text="${topic.getTopicKeyword()}"></td>
                                 <td th:text="${topic.getTeacherName()}"></td>
                                 <td th:text="${topic.getTopicCreationTime()}"></td>
@@ -91,10 +149,10 @@
                         </table>
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=0)}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum-1})}" style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum+1})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showtopiclistBycourseName(start=${page.pages})}" style="color: #F8F8F8">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=0,courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum-1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showtopiclistBycourseName(start=${page.pageNum+1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showtopiclistBycourseName(start=${page.pages},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>
@@ -124,7 +182,37 @@
 
     });
 </script>
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var element = layui.element;
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#btn2").click(function () {
+            layer.open({
+                type: 1,  //类型设置 默认0 1页面层 2ifream
+                title: "新增主题",
+                skin: 'layui-layer-molv',
+                shadeClose: true,
+                anim: 4,
+                maxmin: true,
+                offset: 'auto',
+                content: $("#mydiv"),
+                area: ['700px', '500px']
+            });
+        })
+    });
+</script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
 
-
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+            , type: 'date'
+        });
+    });
+</script>
 </body>
 </html>

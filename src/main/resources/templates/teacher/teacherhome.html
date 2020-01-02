@@ -58,7 +58,7 @@
                                 <th style="width: 200px">开设学期</th>
                                 <th style="width: 200px">总课时数</th>
 
-                                <th style="width: 200px">主讲教师姓名</th>
+                                <th style="width: 200px">主讲教师姓名</th>paper
                                 <th style="width: 200px">团队教师姓名</th>
 
                             </tr>
@@ -69,7 +69,7 @@
                             <!--/*@thymesVar id="page" type=""*/-->
                             <tr th:each="oneteacher : ${page.list}">
                                 <td th:text="${oneteacher.getCourseId()}"></td>
-                                <td><a th:href="@{'/showstudentlist?courseName='+${oneteacher.getCourseName()}}"
+                                <td><a th:href="@{'/showstudentlist?courseId='+${oneteacher.getCourseId()}}"
                                        th:text="${oneteacher.getCourseName()}"></a></td>
 <!--                                <td th:text="${oneteacher.getCourseName()}"></td>-->
 
@@ -84,10 +84,10 @@
 
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=0)}">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum-1})}">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum+1})}">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/teacherhome(start=${page.pages})}">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=0)}" style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum-1})}" style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/teacherhome(start=${page.pageNum+1})}" style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"> <a th:href="@{/teacherhome(start=${page.pages})}" style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>

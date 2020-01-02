@@ -47,58 +47,14 @@
             <!-- 内容主体区域 -->
             <div class="layui-bg-green" style=" font-size: 20px; padding: 15px;">主题详情</div>
             <br> <br>
-            <!--表格内容-->
-            <div id="mydiv" style="display: none;padding: 10px">
-                <form class="layui-form" action="/insertteacher">
-                    <div class="layui-form-item">
-                        <br>
-                        <label class="layui-form-label">主题ID</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="topicId" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">主题名</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="topic" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">关键词</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="keyword" autocomplete="off" class="layui-input">
-                        </div>
 
-                        <br>
-                        <label class="layui-form-label">出题教师ID</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="teacherId" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">创建时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="creationTime" autocomplete="off" class="layui-input">
-                        </div>
-                        <br>
-                        <label class="layui-form-label">选题人数</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="studentNum" autocomplete="off" class="layui-input">
-                        </div>
-
-
-
-                    </div>
-                    <div class="layui-row layui-icon-align-center">
-                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </form>
-            </div>
             <div class="layui-container">
                 <div class="page-content-wrap">
-                    <button type="button" id="btn2" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <div class="white-box">
 
+                    <br>
+                    <div class="white-box">
+                        <br>
+                        <blockquote class="layui-elem-quote">主题内容</blockquote>
                         <table class="layui-table page:true">
                             <colgroup>
                                 <col width="100">
@@ -124,32 +80,71 @@
 
                             </tr>
                             </thead>
-                            <tr th:each="student:${page.list}">
+                            <tr th:each="topic:${topic}">
 
-                                <td th:text="${student.getTopicId()}"></td>
-                                <td th:text="${student.getTopic()}"></td>
-                                <td th:text="${student.getKeyword()}"></td>
-                                <td th:text="${student.getName()}"></td>
+                                <td th:text="${topic.getTopicId()}"></td>
+                                <td th:text="${topic.getTopic()}"></td>
+                                <td th:text="${topic.getKeyword()}"></td>
+                                <td th:text="${topic.getName()}"></td>
+                                <td th:text="${topic.getCreationTime()}"></td>
+                                <td th:text="${topic.getStudentNum()}"></td>
 
                             </tr>
 
 
                         </table>
                         <br>
-                        <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a
-                                    th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a>
-                            </button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
-                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}"
-                                style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
-                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}"
-                                style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"><a
-                                    th:href="@{/showstutopiclistBystudentId(start=${page.pages})}"
-                                    style="color: #F8F8F8">末 页</a></button>
-                        </div>
+                        <!--                        <div class="layui-row">-->
+                        <!--                            <button class="layui-btn layui-btn-small"><a-->
+                        <!--                                    th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a>-->
+                        <!--                            </button>-->
+                        <!--                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a-->
+                        <!--                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}"-->
+                        <!--                                style="color: #F8F8F8">上一页</a></button>-->
+                        <!--                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a-->
+                        <!--                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}"-->
+                        <!--                                style="color: #F8F8F8">下一页</a></button>-->
+                        <!--                            <button class="layui-btn layui-btn-small"><a-->
+                        <!--                                    th:href="@{/showstutopiclistBystudentId(start=${page.pages})}"-->
+                        <!--                                    style="color: #F8F8F8">末 页</a></button>-->
+                        <!--                        </div>-->
+                        <br>
+                        <blockquote class="layui-elem-quote">选取该主题的学生列表</blockquote>
+                        <table class="layui-table page:true">
+                            <colgroup>
+                                <col width="50">
+                                <col width="50">
+                                <col width="50">
+                                <col width="50">
+                                <col width="50">
+                                <col width="200">
+                                <col width="10">
+                                <col width="10">
+                                <col width="10">
+                            </colgroup>
+                            <thead>
+                            <tr>
+
+
+                                <th style="width: 200px">学号</th>
+                                <th style="width: 200px">姓名</th>
+                                <th style="width: 200px">性别</th>
+                                <th style="width: 200px">专业</th>
+                                <th style="width: 200px">班级</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="paper:${paper}">
+
+                                <td th:text="${paper.getStudentId()}"></td>
+                                <td th:text="${paper.getName()}"></td>
+                                <td th:text="${paper.getSex()}"></td>
+                                <td th:text="${paper.getMajor()}"></td>
+                                <td th:text="${paper.getClassName()}"></td>
+
+                            </tr>
+
+
+                        </table>
                         <br>
                         <blockquote class="layui-elem-quote">论文列表</blockquote>
                         <table class="layui-table page:true">
@@ -185,7 +180,7 @@
                                 <td th:text="${paper.getTitle()}"></td>
                                 <td th:text="${paper.getAuthor()}"></td>
                                 <td th:text="${paper.getSource()}"></td>
-                                <td th:text="${paper.getKeyword()}"></td>
+                                <td th:text="${paper.getPaperKeyword()}"></td>
                                 <td th:text="${paper.getAbstractText()}"></td>
                                 <td th:text="${paper.getDocLocation()}"></td>
                                 <td th:text="${paper.getStudentId()}"></td>
@@ -194,20 +189,20 @@
 
 
                         </table>
-                        <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a
-                                    th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a>
-                            </button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
-                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}"
-                                style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
-                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}"
-                                style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"><a
-                                    th:href="@{/showstutopiclistBystudentId(start=${page.pages})}"
-                                    style="color: #F8F8F8">末 页</a></button>
-                        </div>
+                        <!--                        <div class="layui-row">-->
+                        <!--                            <button class="layui-btn layui-btn-small"><a-->
+                        <!--                                    th:href="@{/showstutopiclistBystudentId(start=0)}" style="color: #F8F8F8">首 页</a>-->
+                        <!--                            </button>-->
+                        <!--                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a-->
+                        <!--                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1})}"-->
+                        <!--                                style="color: #F8F8F8">上一页</a></button>-->
+                        <!--                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a-->
+                        <!--                                th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1})}"-->
+                        <!--                                style="color: #F8F8F8">下一页</a></button>-->
+                        <!--                            <button class="layui-btn layui-btn-small"><a-->
+                        <!--                                    th:href="@{/showstutopiclistBystudentId(start=${page.pages})}"-->
+                        <!--                                    style="color: #F8F8F8">末 页</a></button>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -237,27 +232,7 @@
     });
 </script>
 
-<script type="text/javascript">
-    layui.use(['element', 'jquery', 'layer', 'form'], function () {
-        var $ = layui.jquery;
-        var element = layui.element;
-        var layer = layui.layer;
-        var form = layui.form;
-        $("#btn2").click(function () {
-            layer.open({
-                type: 1,  //类型设置 默认0 1页面层 2ifream
-                title: "新增主题",
-                skin: 'layui-layer-molv',
-                shadeClose: true,
-                anim: 4,
-                maxmin: true,
-                offset: 'auto',
-                content: $("#mydiv"),
-                area: ['700px', '500px']
-            });
-        })
-    });
-</script>
+
 
 </body>
 </html>
