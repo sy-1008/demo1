@@ -2,9 +2,11 @@ package com.suyi.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.suyi.demo.model.*;
 import com.suyi.demo.service.CourseService;
 import com.suyi.demo.service.TeacherCourseAllService;
+import com.suyi.demo.service.TeacherService;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class TeacherCourseAllController {
     private TeacherCourseAllService teacherCourseAllService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      * 显示课程详细信息
@@ -87,6 +91,9 @@ public class TeacherCourseAllController {
         model.addAttribute("page", page);
         TeacherCourseAll teacherCourseAll = teacherCourseAlls.get(0);
         model.addAttribute("weilecourseId", teacherCourseAll);
+        //为了显示已注册教师
+        List<Teacher> teachers = teacherService.selectALL();
+        model.addAttribute("teacher", teachers);
         return "/teacher/teacher_coursedetail_teacher.html";
     }
 
@@ -135,7 +142,18 @@ public class TeacherCourseAllController {
             }
         }
         temp = temp + Integer.parseInt(teachHour);
-        if (temp <= courseHour) {
+        Boolean flag = false;
+        //检查身份冲突 是否存在主讲教师
+        if ("主讲教师".equals(teaIdentity)) {
+
+            for (int i = 0; i < teacherCourseAlls.size(); i++) {
+                if ("主讲教师".equals(teacherCourseAlls.get(i).getTeaIdentity())) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (temp <= courseHour && !flag) {
             teacherCourseAllService.teacherinfomodify(teacherId, teacherName, teaIdentity, teachHour, courseId);
         }
 
@@ -145,16 +163,16 @@ public class TeacherCourseAllController {
 
     /**
      * 删除教师授课信息
+     *
      * @param request
      * @return
      */
     @RequestMapping(value = "/deleteteachercourse")
-    public String deleteteachercourse(HttpServletRequest request)
-    {
-        System.out.println(" 1111");
+    public String deleteteachercourse(HttpServletRequest request) {
+
         String teacherId = request.getParameter("teacherId");
         String courseId = request.getParameter(("courseId"));
-        teacherCourseAllService.deleteteachercourse(teacherId,courseId);
+        teacherCourseAllService.deleteteachercourse(teacherId, courseId);
         String url = "redirect:/showteacherinfobycourseName?courseId=" + courseId;
         return url;
     }
