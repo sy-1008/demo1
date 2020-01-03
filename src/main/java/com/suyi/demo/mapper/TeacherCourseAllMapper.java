@@ -2,11 +2,10 @@ package com.suyi.demo.mapper;
 
 import com.suyi.demo.model.TeacherCourseAll;
 import com.suyi.demo.model.TeacherCourseAllExample;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface TeacherCourseAllMapper {
@@ -29,7 +28,33 @@ public interface TeacherCourseAllMapper {
     @ResultMap("BaseResultMap")
     @Select("select * from sy.teacher_course_all where course_name=#{courseName}")
     List<TeacherCourseAll> coursedetailinfo(String courseName);
+
     @ResultMap("BaseResultMap")
     @Select("select  * from sy.teacher_course_all where teacher_name=#{teacherName}")
-    List<TeacherCourseAll>teacherdetailinfo(String teacherName);
+    List<TeacherCourseAll> teacherdetailinfo(String teacherName);
+
+    /**
+     * 修改教师授课信息
+     *
+     * @param teacherId
+     * @param teacherName
+     * @param teaIdentity
+     * @param teachHour
+     * @param courseId
+     * @return
+     */
+    @ResultMap("BaseResultMap")
+    @Update("update sy.tc set tea_identity=#{teaIdentity}," +
+            "teach_hour=#{teachHour} WHERE teacher_id=#{teacherId} AND course_id=#{courseId}")
+    int teacherinfomodify(String teacherId, String teacherName, String teaIdentity, String teachHour, String courseId);
+
+    /**
+     * 删除教师授课信息
+     *
+     * @param teacherId
+     * @param courseId
+     * @return
+     */
+    @Delete("delete from sy.tc WHERE teacher_id=#{teacherId} AND course_id=#{courseId}")
+    int deleteteachercourse(String teacherId, String courseId);
 }

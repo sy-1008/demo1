@@ -20,8 +20,9 @@
     <div class="row">
         <div class="layui-col-md2 layui-bg-black" style="height: 700px;width:13.5%">
 
-            <div class="layui-row"  >
-                <i class="layui-icon layui-icon-username layui-col-md-offset3" style="font-size: 100px; color: #F0F0F0;"></i>
+            <div class="layui-row">
+                <i class="layui-icon layui-icon-username layui-col-md-offset3"
+                   style="font-size: 100px; color: #F0F0F0;"></i>
             </div>
 
             <h4 style="text-align: center"> 你好 你是教师</h4>
@@ -30,11 +31,14 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" >基础管理</a>
-                    <dl class="layui-nav-child" >
+                    <a class="">基础管理</a>
+                    <dl class="layui-nav-child">
                         <dd><a th:href="@{/showstudentlist(courseId=${weilecourseId.getCourseId()})}">学生管理</a></dd>
-                        <dd><a th:href="@{/showtopiclistBycourseName(courseId=${weilecourseId.getCourseId()})}">选题管理</a></dd>
-                        <dd><a th:href="@{/showteacherinfobycourseName(courseId=${weilecourseId.getCourseId()})}">教师管理</a></dd>
+                        <dd><a th:href="@{/showtopiclistBycourseName(courseId=${weilecourseId.getCourseId()})}">选题管理</a>
+                        </dd>
+                        <dd>
+                            <a th:href="@{/showteacherinfobycourseName(courseId=${weilecourseId.getCourseId()})}">教师管理</a>
+                        </dd>
                     </dl>
                 </li>
             </ul>
@@ -104,6 +108,9 @@
                     <button type="button" id="btn2" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe654;</i>
                     </button>
                     <div class="white-box">
+
+
+
                         <table class="layui-table page:true">
                             <colgroup>
                                 <col width="100">
@@ -119,7 +126,6 @@
                             <tr>
 
 
-
                                 <th style="width: 200px">教师ID</th>
                                 <th style="width: 200px">姓名</th>
                                 <th style="width: 200px">身份</th>
@@ -129,7 +135,9 @@
                             </thead>
                             <tr th:each="teacher:${page.list}">
                                 <td th:text="${teacher.getTeacherId()}"></td>
-                                <td th:text="${teacher.getTeacherName()}"></td>
+                                <td><a th:href="@{/sshowteacherinfo(teacherId=${teacher.getTeacherId()},courseId=${weilecourseId.getCourseId()})}"
+                                       th:text="${teacher.getTeacherName()}"></a></td>
+                                <!--                                <td th:text="${teacher.getTeacherName()}"></td>-->
                                 <td th:text="${teacher.getTeaIdentity()}"></td>
                                 <td th:text="${teacher.getTeachHour()}"></td>
                             </tr>
@@ -138,10 +146,18 @@
                         </table>
                         <br>
                         <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showteacherinfobycourseName(start=0,courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showteacherinfobycourseName(start=${page.pageNum-1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showteacherinfobycourseName(start=${page.pageNum+1},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showteacherinfobycourseName(start=${page.pages},courseId=${weilecourseId.getCourseId()})}" style="color: #F8F8F8">末 页</a></button>
+                            <button class="layui-btn layui-btn-small"><a
+                                    th:href="@{/showteacherinfobycourseName(start=0,courseId=${weilecourseId.getCourseId()})}"
+                                    style="color: #F8F8F8">首 页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
+                                th:href="@{/showteacherinfobycourseName(start=${page.pageNum-1},courseId=${weilecourseId.getCourseId()})}"
+                                style="color: #F8F8F8">上一页</a></button>
+                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a
+                                th:href="@{/showteacherinfobycourseName(start=${page.pageNum+1},courseId=${weilecourseId.getCourseId()})}"
+                                style="color: #F8F8F8">下一页</a></button>
+                            <button class="layui-btn layui-btn-small"><a
+                                    th:href="@{/showteacherinfobycourseName(start=${page.pages},courseId=${weilecourseId.getCourseId()})}"
+                                    style="color: #F8F8F8">末 页</a></button>
                         </div>
                     </div>
                 </div>

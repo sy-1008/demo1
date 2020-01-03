@@ -63,4 +63,14 @@ public class TeacherCourseAllServiceImpl implements TeacherCourseAllService{
         return teacherCourseAllMapper.teacherdetailinfo(teacherName);
     }
 
+    @Override
+    public int teacherinfomodify(String teacherId, String teacherName, String teaIdentity, String teachHour,String courseId) {
+        return teacherCourseAllMapper.teacherinfomodify(teacherId,teacherName,teaIdentity,teachHour,courseId);
+    }
+
+    @Override
+    public int deleteteachercourse(String teacherId, String courseId) {
+        return teacherCourseAllMapper.deleteteachercourse(teacherId,courseId);
+    }
+
 }
