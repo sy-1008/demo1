@@ -5,6 +5,8 @@ import com.suyi.demo.model.TopicExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface TopicMapper {
@@ -32,5 +34,13 @@ public interface TopicMapper {
 
     int updateBatch(List<Topic> list);
 
+    /**
+     * 更新选题人数
+     * @param list
+     * @return
+     */
     int batchInsert(@Param("list") List<Topic> list);
+    @ResultMap("BaseResultMap")
+    @Update("update sy.topic set student_num=#{studentNum} where topic_id=#{topicId} ")
+    int updatestudentNum(int studentNum,String topicId);
 }

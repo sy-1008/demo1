@@ -20,8 +20,9 @@
     <div class="row">
         <div class="layui-col-md2 layui-bg-black" style="height: 1000px;width:13.5%">
 
-            <div class="layui-row"  >
-                <i class="layui-icon layui-icon-username layui-col-md-offset3" style="font-size: 100px; color: #F0F0F0;"></i>
+            <div class="layui-row">
+                <i class="layui-icon layui-icon-username layui-col-md-offset3"
+                   style="font-size: 100px; color: #F0F0F0;"></i>
             </div>
 
             <h4 style="text-align: center"> 你好 你是研究生</h4>
@@ -49,7 +50,73 @@
 
             <div class="layui-container">
                 <div class="page-content-wrap">
+                    <div id="mydiv" style="display: none;padding: 10px">
+                        <form class="layui-form" action="/insertpaper" method="post">
+                            <div class="layui-form-item">
+                                <input type="hidden" name="studentId" th:value="${studentId}" autocomplete="off"
+                                       class="layui-input">
 
+                                <br>
+                                <label class="layui-form-label">论文ID</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="paperId" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">论文题目</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">作者</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="author" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">作者</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="author" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">出处</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="source" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">关键词</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="keyword" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <label class="layui-form-label">文件物理位置</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="docLocation" autocomplete="off" class="layui-input">
+                                </div>
+                                <br>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">上传时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="test1" name="uploadingTime" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="layui-form-item">
+                                          <textarea name="abstractText" id="demo" class="layui-hide">
+                                          </textarea>
+                                </div>
+
+                                <br>
+
+                            </div>
+                            <div class="layui-row layui-icon-align-center">
+                                <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*" type="submit">
+                                    立即提交
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="white-box">
                         <blockquote class="layui-elem-quote">我的主题</blockquote>
                         <table class="layui-table page:true">
@@ -67,7 +134,6 @@
                             <tr>
 
 
-
                                 <th style="width: 200px">主题ID</th>
                                 <th style="width: 200px">主题名</th>
                                 <th style="width: 200px">关键词</th>
@@ -76,41 +142,32 @@
 
                             </tr>
                             </thead>
-                            <tr th:each="student:${page.list}">
+                            <tr th:each="my:${mytopicandpaper}">
 
-                                <td th:text="${student.getTopicId()}"></td>
-                                <td th:text="${student.getTopic()}"></td>
-                                <td th:text="${student.getKeyword()}"></td>
-                                <td th:text="${student.getName()}"></td>
-
+                                <td th:text="${my.getTopicId()}"></td>
+                                <td th:text="${my.getTopic()}"></td>
+                                <td th:text="${my.getKeyword()}"></td>
+                                <td th:text="${my.getCreationTime()}"></td>
+                                <td th:text="${my.getStudentNum()}"></td>
                             </tr>
 
 
                         </table>
                         <br>
-                        <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0,studentId=${paper.getStudentId()})}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small" > <a th:href="@{/showstutopiclistBystudentId(start=${page.pages},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">末 页</a></button>
-                        </div>
-                        <br>
-                        <blockquote class="layui-elem-quote">论文列表</blockquote>
-                        <table class="layui-table page:true" >
+                        <blockquote class="layui-elem-quote">我的论文</blockquote>
+                        <table class="layui-table page:true">
                             <colgroup>
-                                <col width="50">
-                                <col  width="50">
-                                <col  width="50">
-                                <col  width="50">
-                                <col width="50">
-                                <col width="200">
-                                <col width="10">
-                                <col width="10">
-                                <col width="10">
+                                <col width="100">
+                                <col class="hidden-xs" width="100">
+                                <col class="hidden-xs" width="100">
+                                <col class="hidden-xs" width="100">
+                                <col class="hidden-xs" width="100">
+                                <col>
+                                <col width="100">
+                                <col width="130">
                             </colgroup>
                             <thead>
                             <tr>
-
 
 
                                 <th style="width: 200px">论文ID</th>
@@ -120,31 +177,30 @@
                                 <th style="width: 200px">关键词</th>
                                 <th style="width: 200px">摘要</th>
                                 <th style="width: 200px">文件物理位置</th>
-                                <th style="width: 200px">学号</th>
+
                                 <th style="width: 200px">上传时间</th>
+
                             </tr>
                             </thead>
-                            <tr th:each="paper:${paper}">
+                            <tr th:each="student:${paper}">
 
-                                <td th:text="${paper.getPaperId()}"></td>
-                                <td th:text="${paper.getTitle()}"></td>
-                                <td th:text="${paper.getAuthor()}"></td>
-                                <td th:text="${paper.getSource()}"></td>
-                                <td th:text="${paper.getKeyword()}"></td>
-                                <td th:text="${paper.getAbstractText()}"></td>
-                                <td th:text="${paper.getDocLocation()}"></td>
-                                <td th:text="${paper.getStudentId()}"></td>
-                                <td th:text="${paper.getUploadingTime()}"></td>
+
+                                <td th:text="${student.getPaperId()}"></td>
+                                <td th:text="${student.getTitle()}"></td>
+                                <td th:text="${student.getAuthor()}"></td>
+                                <td th:text="${student.getSource()}"></td>
+                                <td th:text="${student.getKeyword()}"></td>
+                                <td th:text="${student.getAbstractText()}"></td>
+                                <td th:text="${student.getDocLocation()}"></td>
+
+                                <td th:text="${student.getUploadingTime()}"></td>
                             </tr>
 
 
                         </table>
-                        <div class="layui-row">
-                            <button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=0,studentId=${paper.getStudentId()})}" style="color: #F8F8F8">首 页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum-1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">上一页</a></button>
-                            &nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-small"><a th:href="@{/showstutopiclistBystudentId(start=${page.pageNum+1},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">下一页</a></button>
-                            <button class="layui-btn layui-btn-small"> <a th:href="@{/showstutopiclistBystudentId(start=${page.pages},studentId=${paper.getStudentId()})}" style="color: #F8F8F8">末 页</a></button>
-                        </div>
+                        <button type="button" id="btn2" class="layui-btn layui-btn-molv">上传论文
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -173,7 +229,57 @@
 
     });
 </script>
+<script>
+    layui.use('layedit', function () {
+        var layedit = layui.layedit;
 
+        var index = layedit.build('demo', {
+            //hideTool: ['image']
+            uploadImage: {
+                url: 'json/upload/demoLayEdit.json'
+                , type: 'get'
+            }
+            //,tool: []
+            //,height: 100
+        });
 
+        getChoose.onclick = function () {
+            alert(layedit.getSelection(index));
+        };
+
+    });
+</script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+            , type: 'date'
+        });
+    });
+</script>
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var element = layui.element;
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#btn2").click(function () {
+            layer.open({
+                type: 1,  //类型设置 默认0 1页面层 2ifream
+                title: "上传论文",
+                skin: 'layui-layer-molv',
+                shadeClose: true,
+                anim: 4,
+                maxmin: true,
+                offset: 'auto',
+                content: $("#mydiv"),
+                area: ['800px', '600px']
+            });
+        })
+    });
+</script>
 </body>
 </html>

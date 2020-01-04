@@ -78,4 +78,9 @@ public class TopicServiceImpl implements TopicService{
         return topicMapper.batchInsert(list);
     }
 
+    @Override
+    public int updatestudentNum(int studentNum,String topicId) {
+        return topicMapper.updatestudentNum(studentNum,topicId);
+    }
+
 }

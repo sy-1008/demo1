@@ -32,4 +32,5 @@ public interface TopicService{
 
     int batchInsert(List<Topic> list);
 
+    int updatestudentNum(int studentNum,String topicId);
 }
