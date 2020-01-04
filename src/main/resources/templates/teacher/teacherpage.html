@@ -25,6 +25,7 @@
         </div>
 
         <h4 style="text-align: center"> 你好 你是系统管理员</h4>
+        <p style="text-align: center" th:text="${loginUser.getUserId()}"></p>
         <h4 style="text-align: center">欢迎登录</h4>
         <hr class="layui-bg-green">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -156,7 +157,7 @@
                         <tr th:each="teacher:${page.list}">
                             <td th:text="${teacher.getTeacherId()}"></td>
 <!--                            <td><a href="teacherdetailinfo.html" th:href="@{/teacherdetailinfo(teacherId=${teacher.name})}" th:text="${teacher.getName()}"></a></td>-->
-                            <td><a th:href="@{'/showteacherinfo?name='+${teacher.getName()}}" th:text="${teacher.getName()}"></a></td>
+                            <td><a th:href="@{'/showteacherinfo?teacherId='+${teacher.getTeacherId()}}" th:text="${teacher.getName()}"></a></td>
                             <td th:text="${teacher.getSex()}"></td>
                             <td th:text="${teacher.getProtitle()}"></td>
                             <td th:text="${teacher.getPhone()}"></td>

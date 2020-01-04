@@ -2,9 +2,7 @@ package com.suyi.demo.mapper;
 
 import com.suyi.demo.model.TeacherCourseAll;
 import com.suyi.demo.model.TeacherCourseAllExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.*;
 
 @Mapper
@@ -30,8 +28,8 @@ public interface TeacherCourseAllMapper {
     List<TeacherCourseAll> coursedetailinfo(String courseName);
 
     @ResultMap("BaseResultMap")
-    @Select("select  * from sy.teacher_course_all where teacher_name=#{teacherName}")
-    List<TeacherCourseAll> teacherdetailinfo(String teacherName);
+    @Select("select  * from sy.teacher_course_all where teacher_id=#{teacherId}")
+    List<TeacherCourseAll> teacherdetailinfo(String teacherId);
 
     /**
      * 修改教师授课信息

@@ -15,6 +15,7 @@
     <result column="course_hour" jdbcType="INTEGER" property="courseHour" />
     <result column="tea_identity" jdbcType="VARCHAR" property="teaIdentity" />
     <result column="teach_hour" jdbcType="INTEGER" property="teachHour" />
+    <result column="tc_id" jdbcType="VARCHAR" property="tcId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--@mbg.generated-->
@@ -79,7 +80,7 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, 
-    course_name, term, course_hour, tea_identity, teach_hour
+    course_name, term, course_hour, tea_identity, teach_hour, tc_id
   </sql>
   <select id="selectByExample" parameterType="com.suyi.demo.model.TeacherCourseAllExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -108,11 +109,13 @@
     insert into sy.teacher_course_all (teacher_id, teacher_name, teacher_sex, 
       teacher_protitle, teacher_phone, course_id, 
       course_name, term, course_hour, 
-      tea_identity, teach_hour)
+      tea_identity, teach_hour, tc_id
+      )
     values (#{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, #{teacherSex,jdbcType=CHAR}, 
       #{teacherProtitle,jdbcType=VARCHAR}, #{teacherPhone,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, 
       #{courseName,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, #{courseHour,jdbcType=INTEGER}, 
-      #{teaIdentity,jdbcType=VARCHAR}, #{teachHour,jdbcType=INTEGER})
+      #{teaIdentity,jdbcType=VARCHAR}, #{teachHour,jdbcType=INTEGER}, #{tcId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.suyi.demo.model.TeacherCourseAll">
     <!--@mbg.generated-->
@@ -151,6 +154,9 @@
       <if test="teachHour != null">
         teach_hour,
       </if>
+      <if test="tcId != null">
+        tc_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="teacherId != null">
@@ -185,6 +191,9 @@
       </if>
       <if test="teachHour != null">
         #{teachHour,jdbcType=INTEGER},
+      </if>
+      <if test="tcId != null">
+        #{tcId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -232,6 +241,9 @@
       <if test="record.teachHour != null">
         teach_hour = #{record.teachHour,jdbcType=INTEGER},
       </if>
+      <if test="record.tcId != null">
+        tc_id = #{record.tcId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -250,7 +262,8 @@
       term = #{record.term,jdbcType=VARCHAR},
       course_hour = #{record.courseHour,jdbcType=INTEGER},
       tea_identity = #{record.teaIdentity,jdbcType=VARCHAR},
-      teach_hour = #{record.teachHour,jdbcType=INTEGER}
+      teach_hour = #{record.teachHour,jdbcType=INTEGER},
+      tc_id = #{record.tcId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,14 +272,14 @@
     <!--@mbg.generated-->
     insert into sy.teacher_course_all
     (teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, 
-      course_name, term, course_hour, tea_identity, teach_hour)
+      course_name, term, course_hour, tea_identity, teach_hour, tc_id)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.teacherId,jdbcType=VARCHAR}, #{item.teacherName,jdbcType=VARCHAR}, #{item.teacherSex,jdbcType=CHAR}, 
         #{item.teacherProtitle,jdbcType=VARCHAR}, #{item.teacherPhone,jdbcType=VARCHAR}, 
         #{item.courseId,jdbcType=VARCHAR}, #{item.courseName,jdbcType=VARCHAR}, #{item.term,jdbcType=VARCHAR}, 
-        #{item.courseHour,jdbcType=INTEGER}, #{item.teaIdentity,jdbcType=VARCHAR}, #{item.teachHour,jdbcType=INTEGER}
-        )
+        #{item.courseHour,jdbcType=INTEGER}, #{item.teaIdentity,jdbcType=VARCHAR}, #{item.teachHour,jdbcType=INTEGER}, 
+        #{item.tcId,jdbcType=VARCHAR})
     </foreach>
   </insert>
 </mapper>

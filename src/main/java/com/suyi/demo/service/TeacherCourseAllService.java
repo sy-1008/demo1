@@ -26,9 +26,10 @@ public interface TeacherCourseAllService {
 
     List<TeacherCourseAll> coursedetailinfo(String courseName);
 
-    List<TeacherCourseAll> teacherdetailinfo(String teacherName);
+    List<TeacherCourseAll> teacherdetailinfo(String teacherId);
 
     int teacherinfomodify(String teacherId, String teacherName, String teaIdentity, String teachHour, String courseId);
 
     int deleteteachercourse(String teacherId, String courseId);
 }
+

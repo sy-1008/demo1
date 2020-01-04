@@ -4,59 +4,64 @@ import java.io.Serializable;
 
 public class TeacherCourseAll implements Serializable {
     /**
-    * 教师ID
-    */
+     * 教师ID
+     */
     private String teacherId;
 
     /**
-    * 姓名
-    */
+     * 姓名
+     */
     private String teacherName;
 
     /**
-    * 性别
-    */
+     * 性别
+     */
     private String teacherSex;
 
     /**
-    * 教师职称
-    */
+     * 教师职称
+     */
     private String teacherProtitle;
 
     /**
-    * 手机号
-    */
+     * 手机号
+     */
     private String teacherPhone;
 
     /**
-    * 课程ID
-    */
+     * 课程ID
+     */
     private String courseId;
 
     /**
-    * 课程名
-    */
+     * 课程名
+     */
     private String courseName;
 
     /**
-    * 开设学期
-    */
+     * 开设学期
+     */
     private String term;
 
     /**
-    * 课时数
-    */
+     * 课时数
+     */
     private Integer courseHour;
 
     /**
-    * 身份（主讲教师或者团队教师）
-    */
+     * 身份（主讲教师或者团队教师）
+     */
     private String teaIdentity;
 
     /**
-    * 授课学时
-    */
+     * 授课学时
+     */
     private Integer teachHour;
+
+    /**
+     * TCID
+     */
+    private String tcId;
 
     private static final long serialVersionUID = 1L;
 
@@ -148,6 +153,14 @@ public class TeacherCourseAll implements Serializable {
         this.teachHour = teachHour;
     }
 
+    public String getTcId() {
+        return tcId;
+    }
+
+    public void setTcId(String tcId) {
+        this.tcId = tcId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -165,6 +178,7 @@ public class TeacherCourseAll implements Serializable {
         sb.append(", courseHour=").append(courseHour);
         sb.append(", teaIdentity=").append(teaIdentity);
         sb.append(", teachHour=").append(teachHour);
+        sb.append(", tcId=").append(tcId);
         sb.append("]");
         return sb.toString();
     }

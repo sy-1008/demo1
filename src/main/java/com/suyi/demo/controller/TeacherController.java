@@ -31,8 +31,19 @@ public class TeacherController {
     @Autowired
     TeacherCourseMainTeamService teacherCourseMainTeamService;
 
+    /**
+     * 教师管理页面
+     * @param m
+     * @param session
+     * @param start
+     * @param size
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/teacherpage")
-    public String selectAll(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+    public String selectAll(Model m, HttpSession session,@RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user= (User) session.getAttribute("user");
+        m.addAttribute("loginUser",user);
         PageHelper.startPage(start, size, "teacher_id desc");
         List<Teacher> teachers = teacherService.selectALL();
         PageInfo<Teacher> page = new PageInfo<>(teachers);

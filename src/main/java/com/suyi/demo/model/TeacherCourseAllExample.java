@@ -853,6 +853,76 @@ public class TeacherCourseAllExample {
             addCriterion("teach_hour not between", value1, value2, "teachHour");
             return (Criteria) this;
         }
+
+        public Criteria andTcIdIsNull() {
+            addCriterion("tc_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdIsNotNull() {
+            addCriterion("tc_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdEqualTo(String value) {
+            addCriterion("tc_id =", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdNotEqualTo(String value) {
+            addCriterion("tc_id <>", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdGreaterThan(String value) {
+            addCriterion("tc_id >", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdGreaterThanOrEqualTo(String value) {
+            addCriterion("tc_id >=", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdLessThan(String value) {
+            addCriterion("tc_id <", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdLessThanOrEqualTo(String value) {
+            addCriterion("tc_id <=", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdLike(String value) {
+            addCriterion("tc_id like", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdNotLike(String value) {
+            addCriterion("tc_id not like", value, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdIn(List<String> values) {
+            addCriterion("tc_id in", values, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdNotIn(List<String> values) {
+            addCriterion("tc_id not in", values, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdBetween(String value1, String value2) {
+            addCriterion("tc_id between", value1, value2, "tcId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTcIdNotBetween(String value1, String value2) {
+            addCriterion("tc_id not between", value1, value2, "tcId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

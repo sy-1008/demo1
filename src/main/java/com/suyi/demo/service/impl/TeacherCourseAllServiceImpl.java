@@ -7,8 +7,9 @@ import java.util.List;
 import com.suyi.demo.model.TeacherCourseAllExample;
 import com.suyi.demo.model.TeacherCourseAll;
 import com.suyi.demo.service.TeacherCourseAllService;
+
 @Service
-public class TeacherCourseAllServiceImpl implements TeacherCourseAllService{
+public class TeacherCourseAllServiceImpl implements TeacherCourseAllService {
 
     @Resource
     private TeacherCourseAllMapper teacherCourseAllMapper;
@@ -39,13 +40,13 @@ public class TeacherCourseAllServiceImpl implements TeacherCourseAllService{
     }
 
     @Override
-    public int updateByExampleSelective(TeacherCourseAll record,TeacherCourseAllExample example) {
-        return teacherCourseAllMapper.updateByExampleSelective(record,example);
+    public int updateByExampleSelective(TeacherCourseAll record, TeacherCourseAllExample example) {
+        return teacherCourseAllMapper.updateByExampleSelective(record, example);
     }
 
     @Override
-    public int updateByExample(TeacherCourseAll record,TeacherCourseAllExample example) {
-        return teacherCourseAllMapper.updateByExample(record,example);
+    public int updateByExample(TeacherCourseAll record, TeacherCourseAllExample example) {
+        return teacherCourseAllMapper.updateByExample(record, example);
     }
 
     @Override
@@ -59,18 +60,19 @@ public class TeacherCourseAllServiceImpl implements TeacherCourseAllService{
     }
 
     @Override
-    public List<TeacherCourseAll> teacherdetailinfo(String teacherName) {
-        return teacherCourseAllMapper.teacherdetailinfo(teacherName);
+    public List<TeacherCourseAll> teacherdetailinfo(String teacherId) {
+        return teacherCourseAllMapper.teacherdetailinfo(teacherId);
     }
 
     @Override
-    public int teacherinfomodify(String teacherId, String teacherName, String teaIdentity, String teachHour,String courseId) {
-        return teacherCourseAllMapper.teacherinfomodify(teacherId,teacherName,teaIdentity,teachHour,courseId);
+    public int teacherinfomodify(String teacherId, String teacherName, String teaIdentity, String teachHour, String courseId) {
+        return teacherCourseAllMapper.teacherinfomodify(teacherId, teacherName, teaIdentity, teachHour, courseId);
     }
 
     @Override
     public int deleteteachercourse(String teacherId, String courseId) {
-        return teacherCourseAllMapper.deleteteachercourse(teacherId,courseId);
+        return teacherCourseAllMapper.deleteteachercourse(teacherId, courseId);
     }
 
 }
+

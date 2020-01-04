@@ -1,6 +1,6 @@
-CREATE VIEW teacher_course_team
+CREATE VIEW teacher_course_all
             (teacher_id, teacher_name, teacher_sex, teacher_protitle, teacher_phone, course_id, course_name, term,
-             course_hour, tc_id,tea_identity, teach_hour)
+             course_hour, tea_identity, teach_hour, tc_id)
 AS
 SELECT sy.teacher.teacher_id,
        sy.teacher.name,
@@ -11,14 +11,12 @@ SELECT sy.teacher.teacher_id,
        sy.course.course_name,
        sy.course.term,
        sy.course.course_hour,
-       sy.tc.tc_id,
        sy.tc.tea_identity,
-       sy.tc.teach_hour
-
+       sy.tc.teach_hour,
+       sy.tc.tc_id
 FROM sy.teacher
          LEFT OUTER JOIN sy.tc
                          ON sy.teacher.teacher_id = sy.tc.teacher_id
          LEFT OUTER JOIN sy.course
                          ON sy.tc.course_id = sy.course.course_id
 
-WHERE sy.tc.tea_identity = '团队教师'

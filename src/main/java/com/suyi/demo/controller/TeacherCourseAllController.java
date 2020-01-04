@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.suyi.demo.model.*;
 import com.suyi.demo.service.CourseService;
+import com.suyi.demo.service.TcService;
 import com.suyi.demo.service.TeacherCourseAllService;
 import com.suyi.demo.service.TeacherService;
 import org.apache.ibatis.annotations.ResultMap;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,8 @@ public class TeacherCourseAllController {
     private CourseService courseService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private TcService tcService;
 
     /**
      * 显示课程详细信息
@@ -35,7 +39,10 @@ public class TeacherCourseAllController {
      * @return
      */
     @RequestMapping(value = "/showcourseinfo", method = RequestMethod.GET)
-    public String showcourseinfo(Model model, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+    public String showcourseinfo(Model model, HttpSession session, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser", user);
+
         PageHelper.startPage(start, size, "course_id desc");
         String courseName = request.getParameter("courseName");
         List<TeacherCourseAll> teacherCourseAll = teacherCourseAllService.coursedetailinfo(courseName);
@@ -58,14 +65,16 @@ public class TeacherCourseAllController {
      * @throws Exception
      */
     @RequestMapping(value = "/showteacherinfo", method = RequestMethod.GET)
-    public String showteacherinfo(Model model, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+    public String showteacherinfo(Model model, HttpSession session, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser", user);
         PageHelper.startPage(start, size, "course_id desc");
-        String teacherName = request.getParameter("name");
-        List<TeacherCourseAll> teacherCourseAlls = teacherCourseAllService.teacherdetailinfo(teacherName);
+        String teacherId = request.getParameter("teacherId");
+        List<TeacherCourseAll> teacherCourseAlls = teacherCourseAllService.teacherdetailinfo(teacherId);
         //PageInfo<TeacherCourseAll>page=new PageInfo<>(teacherCourseAlls);
         model.addAttribute("oneteacher", teacherCourseAlls);
 
-        TeacherCourseAll t = teacherCourseAllService.teacherdetailinfo(teacherName).get(0);
+        TeacherCourseAll t = teacherCourseAllService.teacherdetailinfo(teacherId).get(0);
         model.addAttribute("teacher", t);
         return "teacher/teacherdetailinfo.html";
     }
@@ -174,6 +183,29 @@ public class TeacherCourseAllController {
         String courseId = request.getParameter(("courseId"));
         teacherCourseAllService.deleteteachercourse(teacherId, courseId);
         String url = "redirect:/showteacherinfobycourseName?courseId=" + courseId;
+        return url;
+    }
+
+    /**
+     * 修改教师授课信息 （wt）
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/modifyteachercourseall",method = RequestMethod.POST)
+    public String modifyteachercourseall(HttpServletRequest request) {
+        String tcId = request.getParameter("tcId");
+        String courseId = request.getParameter("courseId");
+        String teacherId = request.getParameter("teacherId");
+        String teaIdentity = request.getParameter("identity");
+        int teachHour = Integer.parseInt(request.getParameter("teachHour"));
+        Tc tc = new Tc();
+        tc.setTcId(tcId);
+        tc.setCourseId(courseId);
+        tc.setTeacherId(teacherId);
+        tc.setTeaIdentity(teaIdentity);
+        tc.setTeachHour(teachHour);
+        tcService.updateByPrimaryKey(tc);
+        String url="redirect:/showteacherinfo?teacherId="+ teacherId ;
         return url;
     }
 }
