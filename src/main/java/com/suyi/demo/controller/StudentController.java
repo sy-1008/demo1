@@ -138,7 +138,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/showcoursetopic")
-    public String showcoursetopic(Model model, HttpServletRequest request) {
+    public String showcoursetopic(Model model, HttpSession session,HttpServletRequest request) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser",user);
         String studentId = request.getParameter("studentId");
         model.addAttribute("studentId", studentId);
         String courseId = request.getParameter("courseId");
@@ -160,7 +162,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/showstudentlistandpaperlistBytopicId")
-    public String showstudentlistandpaperlistBycourseId(Model model, HttpServletRequest request) {
+    public String showstudentlistandpaperlistBycourseId(Model model,HttpSession session, HttpServletRequest request) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser",user);
         String topicId = request.getParameter("topicId");
         PaperStudentStutopicTopicExample paperStudentStutopicTopicExample = new PaperStudentStutopicTopicExample();
         paperStudentStutopicTopicExample.createCriteria().andTopicIdEqualTo(topicId);
@@ -177,7 +181,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/showmytopicandpaper")
-    public String showmytopicandpaper(Model model, HttpServletRequest request) {
+    public String showmytopicandpaper(Model model,HttpSession session, HttpServletRequest request) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser",user);
         String studentId = request.getParameter("studentId");
         model.addAttribute("studentId", studentId);
         StudentStutopicTopicExample studentStutopicTopicExample = new StudentStutopicTopicExample();

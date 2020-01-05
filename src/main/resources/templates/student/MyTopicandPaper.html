@@ -26,6 +26,7 @@
             </div>
 
             <h4 style="text-align: center"> 你好 你是研究生</h4>
+            <p style="text-align: center" th:text="${loginUser.getUserId()}"></p>
             <h4 style="text-align: center">欢迎登录</h4>
             <hr class="layui-bg-green">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -72,11 +73,8 @@
                                     <input type="text" name="author" autocomplete="off" class="layui-input">
                                 </div>
                                 <br>
-                                <label class="layui-form-label">作者</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="author" autocomplete="off" class="layui-input">
-                                </div>
-                                <br>
+
+
                                 <label class="layui-form-label">出处</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="source" autocomplete="off" class="layui-input">
