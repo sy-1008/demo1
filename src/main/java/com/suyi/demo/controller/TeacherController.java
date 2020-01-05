@@ -52,15 +52,62 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/insertteacher")
-    public String insertTeacher(Teacher teacher, Course course, Tc tc) {
+    public String insertTeacher(HttpServletRequest request) {
+        String teacherId=request.getParameter("teacherId");
         User u = new User();
-        u.setUserId(teacher.getTeacherId());
+        u.setUserId(teacherId);
         u.setPassword("123456");
         u.setRole(2);
+        //判定授课学时冲突
+        String name=request.getParameter("name");
+        String sex=request.getParameter("sex");
+        String pro=request.getParameter("pro");
+        String phone=request.getParameter("phone");
+        String courseId=request.getParameter("courseId");
+        String courseName=request.getParameter("courseName");
+        String teachHour=request.getParameter("teachHour");
+        String teaIdentity=request.getParameter("teaIdentity");
+        String tcId=request.getParameter("tcId");
+        Course course = courseService.selectByPrimaryKey(courseId);
+        int courseHour = course.getCourseHour();
+        TeacherCourseAllExample teacherCourseAllExample = new TeacherCourseAllExample();
+        teacherCourseAllExample.createCriteria().andCourseIdEqualTo(courseId);
+        List<TeacherCourseAll> teacherCourseAlls = teacherCourseAllService.selectByExample(teacherCourseAllExample);
+        int temp = 0;
+        for (int i = 0; i < teacherCourseAlls.size(); i++) {
+            if (!teacherId.equals(teacherCourseAlls.get(i).getTeacherId())) {
+                temp = temp + teacherCourseAlls.get(i).getTeachHour();
+            }
+        }
+        temp = temp + Integer.parseInt(teachHour);
+        Boolean flag = false;
+        //检查身份冲突 是否存在主讲教师
+        if ("主讲教师".equals(teaIdentity)) {
+
+            for (int i = 0; i < teacherCourseAlls.size(); i++) {
+                if ("主讲教师".equals(teacherCourseAlls.get(i).getTeaIdentity())) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (temp <= courseHour && !flag) {
         userService.insert(u);
+        Teacher teacher=new Teacher();
+        teacher.setTeacherId(teacherId);
+        teacher.setName(name);
+        teacher.setProtitle(pro);
+        teacher.setPhone(phone);
+        teacher.setSex(sex);
         teacherService.insert(teacher);
-        courseService.insert(course);
+        Tc tc=new Tc();
+        tc.setTcId(tcId);
+        tc.setCourseId(courseId);
+        tc.setTeacherId(teacherId);
+        tc.setTeaIdentity(teaIdentity);
+        tc.setTeachHour(Integer.parseInt(teachHour));
         tcService.insert(tc);
+        }
         return "redirect:/teacherpage";
     }
 
@@ -73,6 +120,7 @@ public class TeacherController {
     @RequestMapping(value = "/teacherhome")
     public String selectteacher(Model m, HttpSession session, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
         User user = (User) session.getAttribute("user");
+        m.addAttribute("loginUser", user);
         TeacherCourseMainTeamExample example = new TeacherCourseMainTeamExample();
         example.or().andTeacherIdEqualTo(user.getUserId());
         example.or().andTeacherTeamIdEqualTo(user.getUserId());

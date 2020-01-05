@@ -4,10 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.suyi.demo.model.*;
-import com.suyi.demo.service.CourseService;
-import com.suyi.demo.service.TcService;
-import com.suyi.demo.service.TeacherCourseAllService;
-import com.suyi.demo.service.TeacherService;
+import com.suyi.demo.service.*;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +27,8 @@ public class TeacherCourseAllController {
     private TeacherService teacherService;
     @Autowired
     private TcService tcService;
+    @Autowired
+    private TeacherCourseService teacherCourseService;
 
     /**
      * 显示课程详细信息
@@ -114,7 +113,9 @@ public class TeacherCourseAllController {
      * @return
      */
     @RequestMapping(value = "/sshowteacherinfo", method = RequestMethod.GET)
-    public String teacherinfomodifyByteacherId(Model model, HttpServletRequest request) {
+    public String teacherinfomodifyByteacherId(Model model,HttpSession session, HttpServletRequest request) {
+        User user= (User) session.getAttribute("user");
+        model.addAttribute("loginUser",user);
         String courseId = request.getParameter("courseId");
         String teacherId = request.getParameter("teacherId");
         TeacherCourseAllExample teacherCourseAllExample = new TeacherCourseAllExample();
@@ -187,25 +188,52 @@ public class TeacherCourseAllController {
     }
 
     /**
-     * 修改教师授课信息 （wt）
+     * 修改教师授课信息
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/modifyteachercourseall",method = RequestMethod.POST)
+    @RequestMapping(value = "/modifyteachercourseall", method = RequestMethod.POST)
     public String modifyteachercourseall(HttpServletRequest request) {
         String tcId = request.getParameter("tcId");
         String courseId = request.getParameter("courseId");
         String teacherId = request.getParameter("teacherId");
         String teaIdentity = request.getParameter("identity");
-        int teachHour = Integer.parseInt(request.getParameter("teachHour"));
-        Tc tc = new Tc();
-        tc.setTcId(tcId);
-        tc.setCourseId(courseId);
-        tc.setTeacherId(teacherId);
-        tc.setTeaIdentity(teaIdentity);
-        tc.setTeachHour(teachHour);
-        tcService.updateByPrimaryKey(tc);
-        String url="redirect:/showteacherinfo?teacherId="+ teacherId ;
+        String teachHour = request.getParameter("teachHour");
+        Boolean exist = false;
+        //判断是否存在主讲教师
+        if (teaIdentity.equals("主讲教师")) {
+            TeacherCourseExample teacherCourseExample = new TeacherCourseExample();
+            teacherCourseExample.createCriteria().andCourseIdEqualTo(courseId);
+            List<TeacherCourse> teacherCourses = teacherCourseService.selectByExample(teacherCourseExample);
+            if (teacherCourses.size() != 0) {
+                exist = true;
+            }
+        }
+        //判断授课学时冲突
+        Course course = courseService.selectByPrimaryKey(courseId);
+        int courseHour = course.getCourseHour();
+        TeacherCourseAllExample teacherCourseAllExample = new TeacherCourseAllExample();
+        teacherCourseAllExample.createCriteria().andCourseIdEqualTo(courseId);
+        List<TeacherCourseAll> teacherCourseAlls = teacherCourseAllService.selectByExample(teacherCourseAllExample);
+        int temp = 0;
+        //计算其他老师已有授课时长
+        for (int i = 0; i < teacherCourseAlls.size(); i++) {
+            if (!teacherId.equals(teacherCourseAlls.get(i).getTeacherId())) {
+                temp = temp + teacherCourseAlls.get(i).getTeachHour();
+            }
+        }
+        temp = temp + Integer.parseInt(teachHour);
+        if (temp <= courseHour && !exist){
+            Tc tc = new Tc();
+            tc.setTcId(tcId);
+            tc.setCourseId(courseId);
+            tc.setTeacherId(teacherId);
+            tc.setTeaIdentity(teaIdentity);
+            tc.setTeachHour(Integer.parseInt(teachHour));
+            tcService.updateByPrimaryKey(tc);
+        }
+        String url = "redirect:/showteacherinfo?teacherId=" + teacherId;
         return url;
     }
 }

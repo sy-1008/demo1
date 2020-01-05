@@ -31,7 +31,6 @@ public class TeacherCourseController {
     public String selectAll(Model model, HttpSession session,@RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception
     {
         User user= (User) session.getAttribute("user");
-//        Teacher teacher=teacherService.FindteacherName(user);
         model.addAttribute("loginUser",user);
         PageHelper.startPage(start, size, "course_id desc");
         List<TeacherCourse>teacherCourses=teacherCourseService.selectAll();
@@ -39,11 +38,6 @@ public class TeacherCourseController {
         model.addAttribute("page", page);
         return "/admin/coursepage.html";
     }
-//    @RequestMapping(value = "/insertcourse",method = RequestMethod.POST)
-//public String insertCourse(Course course )
-//{
-//    //teacherCourseService.insertcourse(course);
-//    return "redirect:/coursepage";
-//}
+
 
 }

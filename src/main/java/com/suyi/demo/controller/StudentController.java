@@ -41,6 +41,10 @@ public class StudentController {
     private StutopicService stutopicService;
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private TeacherCourseService teacherCourseService;
+    @Autowired
+    private ScService scService;
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -54,7 +58,9 @@ public class StudentController {
      * @throws Exception
      */
     @RequestMapping(value = "/showstudentlist", method = RequestMethod.GET)
-    public String showstudentlistBycourseId(Model model, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+    public String showstudentlistBycourseId(Model model, HttpSession session, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser", user);
         PageHelper.startPage(start, size, "course_id desc");
         String courseId = request.getParameter("courseId");
         //设置session
@@ -115,6 +121,7 @@ public class StudentController {
     @RequestMapping(value = "/studenthome")
     public String selectstudent(Model model, HttpSession session, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
         User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser",user);
         StudentScCourseTcTeacherExample studentScCourseTcTeacherExample = new StudentScCourseTcTeacherExample();
         studentScCourseTcTeacherExample.createCriteria().andStudentIdEqualTo(user.getUserId()).andTeaIdentityEqualTo("主讲教师");
         List<StudentScCourseTcTeacher> studentScCourseTcTeachers = studentScCourseTcTeacherService.selectByExample(studentScCourseTcTeacherExample);
@@ -135,9 +142,9 @@ public class StudentController {
         String studentId = request.getParameter("studentId");
         model.addAttribute("studentId", studentId);
         String courseId = request.getParameter("courseId");
-        TopicExample topicExample=new TopicExample();
+        TopicExample topicExample = new TopicExample();
         topicExample.createCriteria().andCourseIdEqualTo(courseId);
-        List<Topic>topics=topicService.selectByExample(topicExample);
+        List<Topic> topics = topicService.selectByExample(topicExample);
 //        PaperStudentStutopicTopicExample paperStudentStutopicTopicExample = new PaperStudentStutopicTopicExample();
 //        paperStudentStutopicTopicExample.createCriteria().andCourseIdEqualTo(courseId);
 //        List<PaperStudentStutopicTopic> paperStudentStutopicTopics = paperStudentStutopicTopicService.selectByExample(paperStudentStutopicTopicExample);
@@ -223,13 +230,13 @@ public class StudentController {
         String topicId = request.getParameter("topicId");
         //判断是否满5人
         Topic topic = topicService.selectByPrimaryKey(topicId);
-        int studentNum=topic.getStudentNum();
+        int studentNum = topic.getStudentNum();
         if (studentNum < 5) {
             Stutopic stutopic = new Stutopic();
             Random rand = new Random();
-            int i=rand.nextInt();
+            int i = rand.nextInt();
             //转为字符串
-            stutopic.setStutopicId(i+"");
+            stutopic.setStutopicId(i + "");
             stutopic.setStudentId(studentId);
             stutopic.setTopicId(topicId);
             stutopic.setFlag("0");
@@ -237,11 +244,89 @@ public class StudentController {
             Date time = cal.getTime();
             stutopic.setSelectTime(time);
             stutopicService.insert(stutopic);
-            studentNum+=1;
+            studentNum += 1;
             //更新topic表
-            topicService.updatestudentNum(studentNum,topicId);
+            topicService.updatestudentNum(studentNum, topicId);
         }
         String url = "redirect:/showmytopicandpaper?studentId=" + studentId;
+        return url;
+    }
+
+    /**
+     * 新增选课学生
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/insertsc", method = RequestMethod.POST)
+    public String insertsc(HttpServletRequest request) {
+        String teacherId = request.getParameter("teacherId");
+        String scId = request.getParameter("scId");
+        String courseId = request.getParameter("courseId");
+        String studentId = request.getParameter("studentId");
+        String score = request.getParameter("score");
+        TeacherCourseExample teacherCourseExample = new TeacherCourseExample();
+        teacherCourseExample.createCriteria().andCourseIdEqualTo(courseId).andTeacherIdEqualTo(teacherId);
+        List<TeacherCourse> teacherCourses = teacherCourseService.selectByExample(teacherCourseExample);
+        //判断是否为主讲教师
+        if (teacherCourses.size() != 0) {
+            Sc sc = new Sc();
+            sc.setScId(scId);
+            sc.setCourseId(courseId);
+            sc.setStudentId(studentId);
+            sc.setScore(Integer.parseInt(score));
+            scService.insert(sc);
+        }
+        String url = "redirect:/showstudentlist?courseId=" + courseId;
+        return url;
+    }
+
+    /**
+     * 编辑选课学生信息
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/updatesc", method = RequestMethod.POST)
+    public String updatesc(HttpServletRequest request) {
+        String teacherId = request.getParameter("teacherId");
+        String scId = request.getParameter("scId");
+        String courseId = request.getParameter("courseId");
+        String studentId = request.getParameter("studentId");
+        String score = request.getParameter("score");
+        TeacherCourseExample teacherCourseExample = new TeacherCourseExample();
+        teacherCourseExample.createCriteria().andCourseIdEqualTo(courseId).andTeacherIdEqualTo(teacherId);
+        List<TeacherCourse> teacherCourses = teacherCourseService.selectByExample(teacherCourseExample);
+        //判断是否为主讲教师
+        if (teacherCourses.size() != 0) {
+            Sc sc = new Sc();
+            sc.setScId(scId);
+            sc.setCourseId(courseId);
+            sc.setStudentId(studentId);
+            sc.setScore(Integer.parseInt(score));
+            scService.updateByPrimaryKey(sc);
+        }
+        String url = "redirect:/showstudentlist?courseId=" + courseId;
+        return url;
+    }
+
+    @RequestMapping(value = "/deletesc", method = RequestMethod.POST)
+    public String deletesc(HttpServletRequest request) {
+        String teacherId = request.getParameter("teacherId");
+        String scId = request.getParameter("scId");
+        String courseId = request.getParameter("courseId");
+
+
+        TeacherCourseExample teacherCourseExample = new TeacherCourseExample();
+        teacherCourseExample.createCriteria().andCourseIdEqualTo(courseId).andTeacherIdEqualTo(teacherId);
+        List<TeacherCourse> teacherCourses = teacherCourseService.selectByExample(teacherCourseExample);
+        //判断是否为主讲教师
+        if (teacherCourses.size() != 0) {
+
+
+            scService.deleteByPrimaryKey(scId);
+        }
+        String url = "redirect:/showstudentlist?courseId=" + courseId;
         return url;
     }
 }

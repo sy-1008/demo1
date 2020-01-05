@@ -25,6 +25,7 @@
             </div>
 
             <h4 style="text-align: center"> 你好 你是教师</h4>
+            <p style="text-align: center" th:text="${loginUser.getUserId()}"></p>
             <h4 style="text-align: center">欢迎登录</h4>
             <hr class="layui-bg-green">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -46,13 +47,111 @@
             <!-- 内容主体区域 -->
             <div class="layui-bg-green" style=" font-size: 20px; padding: 15px;">学生管理</div>
             <br> <br>
+            <div id="mydiv" style="display: none;padding: 10px">
+                <form class="layui-form" action="/insertsc" method="post">
+                    <div class="layui-form-item">
+                        <input  type="hidden" name="teacherId" autocomplete="off" class="layui-input" th:value="${loginUser.getUserId()}">
+                        <br>
+                        <label class="layui-form-label">SCID</label>
+                        <div class="layui-input-block">
+                            <input  type="text" name="scId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">课程ID</label>
+                        <div class="layui-input-block">
+                            <input  type="text" name="courseId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">学号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="studentId" autocomplete="off" class="layui-input">
+                        </div>
 
+                        <br>
+                        <label class="layui-form-label">成绩</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="score" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    <div class="layui-row layui-icon-align-center">
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </form>
+            </div>
+            <div id="mydiv1" style="display: none;padding: 10px">
+            <form class="layui-form" action="/updatesc" method="post">
+                <div class="layui-form-item">
+                    <input  type="hidden" name="teacherId" autocomplete="off" class="layui-input" th:value="${loginUser.getUserId()}">
+                    <br>
+                    <label class="layui-form-label">SCID</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="scId" autocomplete="off" class="layui-input">
+                    </div>
+                    <br>
+                    <label class="layui-form-label">课程ID</label>
+                    <div class="layui-input-block">
+                        <input  type="text" name="courseId" autocomplete="off" class="layui-input">
+                    </div>
+                    <br>
+                    <label class="layui-form-label">学号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="studentId" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <br>
+                    <label class="layui-form-label">成绩</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="score" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                </div>
+                <div class="layui-row layui-icon-align-center">
+                    <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </form>
+        </div>
+            <div id="mydiv2" style="display: none;padding: 10px">
+                <form class="layui-form" action="/deletesc" method="post">
+                    <div class="layui-form-item">
+                        <input  type="hidden" name="teacherId" autocomplete="off" class="layui-input" th:value="${loginUser.getUserId()}">
+                        <br>
+                        <label class="layui-form-label">SCID</label>
+                        <div class="layui-input-block">
+                            <input  type="text" name="scId" autocomplete="off" class="layui-input">
+                        </div>
+                        <br>
+                        <label class="layui-form-label">课程ID</label>
+                        <div class="layui-input-block">
+                            <input  type="text" name="courseId" autocomplete="off" class="layui-input">
+                        </div>
+
+
+
+                    </div>
+                    <div class="layui-row layui-icon-align-center">
+                        <button class="layui-btn layui-col-md-offset6" lay-submit lay-filter="*">立即提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </form>
+            </div>
             <div class="layui-container">
                 <div class="page-content-wrap">
                     <div class="layui-inline">
-                        <button class="layui-btn layui-btn-molv" data-id="1" data-url="menu-add.html"><i class="layui-icon">&#xe654;</i></button>
-                        <button class="layui-btn layui-btn-molv" data-id="7" data-url="menu-add.html"><i class="layui-icon">&#xe642;</i></button>
-                        <button class="layui-btn layui-btn-molv" data-id="7" data-url="menu-add.html"><i class="layui-icon">&#xe640;</i></button>
+                        <button type="button" id="btn2" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe654;</i>
+                        </button>
+                        <button type="button" id="btn3" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe642;</i>
+                        </button>
+                        <button type="button" id="btn4" class="layui-btn layui-btn-molv"><i class="layui-icon">&#xe640;</i>
+                        </button>
+
                     </div>
                     <div class="white-box">
                         <table class="layui-table page:true">
@@ -127,7 +226,68 @@
 
     });
 </script>
-
-
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var element = layui.element;
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#btn2").click(function () {
+            layer.open({
+                type: 1,  //类型设置 默认0 1页面层 2ifream
+                title: "新增选课学生",
+                skin: 'layui-layer-molv',
+                shadeClose: true,
+                anim: 4,
+                maxmin: true,
+                offset: 'auto',
+                content: $("#mydiv"),
+                area: ['700px', '500px']
+            });
+        })
+    });
+</script>
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var element = layui.element;
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#btn3").click(function () {
+            layer.open({
+                type: 1,  //类型设置 默认0 1页面层 2ifream
+                title: "编辑选课学生",
+                skin: 'layui-layer-molv',
+                shadeClose: true,
+                anim: 4,
+                maxmin: true,
+                offset: 'auto',
+                content: $("#mydiv1"),
+                area: ['700px', '500px']
+            });
+        })
+    });
+</script>
+<script type="text/javascript">
+    layui.use(['element', 'jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var element = layui.element;
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#btn4").click(function () {
+            layer.open({
+                type: 1,  //类型设置 默认0 1页面层 2ifream
+                title: "删除选课学生",
+                skin: 'layui-layer-molv',
+                shadeClose: true,
+                anim: 4,
+                maxmin: true,
+                offset: 'auto',
+                content: $("#mydiv2"),
+                area: ['700px', '500px']
+            });
+        })
+    });
+</script>
 </body>
 </html>

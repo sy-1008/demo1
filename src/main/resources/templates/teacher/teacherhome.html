@@ -25,6 +25,7 @@
             </div>
 
             <h4 style="text-align: center"> 你好 你是教师</h4>
+            <p style="text-align: center" th:text="${loginUser.getUserId()}"></p>
             <h4 style="text-align: center">欢迎登录</h4>
             <hr class="layui-bg-green">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -58,7 +59,7 @@
                                 <th style="width: 200px">开设学期</th>
                                 <th style="width: 200px">总课时数</th>
 
-                                <th style="width: 200px">主讲教师姓名</th>paper
+                                <th style="width: 200px">主讲教师姓名</th>
                                 <th style="width: 200px">团队教师姓名</th>
 
                             </tr>
@@ -69,7 +70,7 @@
                             <!--/*@thymesVar id="page" type=""*/-->
                             <tr th:each="oneteacher : ${page.list}">
                                 <td th:text="${oneteacher.getCourseId()}"></td>
-                                <td><a th:href="@{'/showstudentlist?courseId='+${oneteacher.getCourseId()}}"
+                                <td><a th:href="@{/showstudentlist(courseId=${oneteacher.getCourseId()},teacherId=${loginUser.getUserId()})}"
                                        th:text="${oneteacher.getCourseName()}"></a></td>
 <!--                                <td th:text="${oneteacher.getCourseName()}"></td>-->
 

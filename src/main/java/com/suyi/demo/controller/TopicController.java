@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
@@ -43,8 +44,9 @@ public class TopicController {
      * @throws Exception
      */
     @RequestMapping(value = "/showtopiclistBycourseName", method = RequestMethod.GET)
-    public String showtopiclistBycourseName(Model model, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
-
+    public String showtopiclistBycourseName(Model model, HttpSession session, HttpServletRequest request, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "10") int size) throws Exception {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("loginUser", user);
         PageHelper.startPage(start, size);
         String courseId = request.getParameter("courseId");
         TeacherCourseTopicExample example = new TeacherCourseTopicExample();
